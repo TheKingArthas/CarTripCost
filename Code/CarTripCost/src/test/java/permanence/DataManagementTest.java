@@ -16,10 +16,21 @@ import static org.junit.Assert.*;
 public class DataManagementTest {
 
     Car newCar;
+    String licensePlate;
+    Fuel newFuel;
+    double cost;
 
     @Before
     public void setUp() {
         newCar = new Car();
+        licensePlate = "ABC1234";
+        newCar.setLicensePlate(licensePlate);
+
+        newFuel = new Fuel();
+        cost = 12.34;
+        newFuel.setType(FuelType.GASOLINE);
+        newFuel.setCost(cost);
+        newFuel.setCostUpdateDate(new Date());
     }
 
     @After
@@ -32,8 +43,6 @@ public class DataManagementTest {
 
     @Test
     public void testAddCar() {
-        newCar = new Car();
-
         DataManagement.addCar(newCar);
 
         assertTrue(TempDB.getInstance().cars.contains(newCar));
@@ -41,10 +50,6 @@ public class DataManagementTest {
 
     @Test
     public void testGetCarByLicensePlate() {
-        newCar = new Car();
-        String licensePlate = "ABC1234";
-        newCar.setLicensePlate(licensePlate);
-
         DataManagement.addCar(newCar);
 
         Car obtainedCar = DataManagement.getCarByLicensePlate(licensePlate);
@@ -54,8 +59,6 @@ public class DataManagementTest {
 
     @Test
     public void testAddFuel() {
-        Fuel newFuel = new Fuel();
-
         DataManagement.addFuel(newFuel);
 
         assertTrue(TempDB.getInstance().historicalFuelPrices.contains(newFuel));
@@ -63,11 +66,7 @@ public class DataManagementTest {
 
     @Test
     public void testGetFuelGasolineCurrentCost() {
-        Fuel newFuel = new Fuel();
-        double cost = 12.34;
-        newFuel.setType(FuelType.GASOLINE);
-        newFuel.setCost(cost);
-        newFuel.setCostUpdateDate(new Date());
+
         DataManagement.addFuel(newFuel);
 
         double obtainedCost = DataManagement.getFuelCost(FuelType.GASOLINE);
@@ -90,7 +89,6 @@ public class DataManagementTest {
         yesterday = c.getTime();
         olderFuel.setCostUpdateDate(yesterday);
 
-        Fuel newFuel = new Fuel();
         double newCost = 12.34;
         newFuel.setType(FuelType.GASOLINE);
         newFuel.setCost(newCost);
@@ -104,4 +102,5 @@ public class DataManagementTest {
         /*"0.009" was the selected delta to avoid differences 
         when rounding prices.*/
     }
+
 }
