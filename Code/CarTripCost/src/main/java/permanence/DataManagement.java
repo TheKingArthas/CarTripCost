@@ -13,4 +13,17 @@ public class DataManagement {
 
         tempDB.cars.add(car);
     }
+
+    public static Car getCarByLicensePlate(String licensePlate) {
+        TempDB tempDB = TempDB.getInstance();
+        Car requestedCar = null;
+
+        for (Car c : tempDB.cars) {
+            if (c.getLicensePlate().equals(licensePlate)) {
+                requestedCar = c;
+            }
+        }
+
+        return requestedCar;
+    }
 }
