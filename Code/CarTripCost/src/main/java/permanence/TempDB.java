@@ -11,9 +11,11 @@ public class TempDB {
 
     private static TempDB tempDB = null;
     public ArrayList<Car> cars;
+    public ArrayList<Fuel> historicalFuelPrices;
 
     private TempDB() {
         cars = new ArrayList<Car>();
+        historicalFuelPrices = new ArrayList<Fuel>();
     }
 
     public static TempDB getInstance() {
