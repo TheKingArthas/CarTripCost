@@ -20,14 +20,17 @@ public class DataManagementTest {
     double fuelTankCapacity;
     Fuel newFuel;
     double cost;
+    double carEfficiency;
 
     @Before
     public void setUp() {
         newCar = new Car();
         licensePlate = "ABC1234";
-        fuelTankCapacity = 40.00;
         newCar.setLicensePlate(licensePlate);
+        fuelTankCapacity = 40.00;
         newCar.setTankCapacity(fuelTankCapacity);
+        carEfficiency = 16;
+        newCar.setEfficiency(carEfficiency);
 
         newFuel = new Fuel();
         cost = 12.34;
@@ -106,5 +109,11 @@ public class DataManagementTest {
         assertEquals(expectedCost, obtainedCost, 0.009);
         /*"0.009" was the selected delta to avoid differences 
         when rounding prices.*/
+    }
+
+    @Test
+    public void testGetCarMaxDistance() {
+        double expectedDistance = fuelTankCapacity * carEfficiency;
+        double obtainedDistance = newCar.getCarMaxDistance();
     }
 }
