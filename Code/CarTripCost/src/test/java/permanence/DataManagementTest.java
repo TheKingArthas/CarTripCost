@@ -17,6 +17,7 @@ public class DataManagementTest {
 
     Car newCar;
     String licensePlate;
+    double fuelTankCapacity;
     Fuel newFuel;
     double cost;
 
@@ -24,13 +25,18 @@ public class DataManagementTest {
     public void setUp() {
         newCar = new Car();
         licensePlate = "ABC1234";
+        fuelTankCapacity = 40.00;
         newCar.setLicensePlate(licensePlate);
+        newCar.setTankCapacity(fuelTankCapacity);
 
         newFuel = new Fuel();
         cost = 12.34;
         newFuel.setType(FuelType.GASOLINE);
         newFuel.setCost(cost);
         newFuel.setCostUpdateDate(new Date());
+
+        DataManagement.addCar(newCar);
+        DataManagement.addFuel(newFuel);
     }
 
     @After
@@ -43,15 +49,11 @@ public class DataManagementTest {
 
     @Test
     public void testAddCar() {
-        DataManagement.addCar(newCar);
-
         assertTrue(TempDB.getInstance().cars.contains(newCar));
     }
 
     @Test
     public void testGetCarByLicensePlate() {
-        DataManagement.addCar(newCar);
-
         Car obtainedCar = DataManagement.getCarByLicensePlate(licensePlate);
 
         assertEquals(newCar, obtainedCar);
@@ -59,16 +61,11 @@ public class DataManagementTest {
 
     @Test
     public void testAddFuel() {
-        DataManagement.addFuel(newFuel);
-
         assertTrue(TempDB.getInstance().historicalFuelPrices.contains(newFuel));
     }
 
     @Test
     public void testGetFuelGasolineCurrentCost() {
-
-        DataManagement.addFuel(newFuel);
-
         double obtainedCost = DataManagement.getFuelCost(FuelType.GASOLINE);
 
         assertEquals(cost, obtainedCost, 0.009);
@@ -94,8 +91,6 @@ public class DataManagementTest {
         newFuel.setCost(newCost);
         newFuel.setCostUpdateDate(new Date());
 
-        DataManagement.addFuel(newFuel);
-
         double obtainedCost = DataManagement.getFuelCost(FuelType.GASOLINE);
 
         assertEquals(newCost, obtainedCost, 0.009);
@@ -103,4 +98,13 @@ public class DataManagementTest {
         when rounding prices.*/
     }
 
+    @Test
+    public void testGetCarFullTankCost() {
+        double expectedCost = fuelTankCapacity * cost;
+        double obtainedCost = DataManagement.getFullFuelTankCost(newCar, FuelType.GASOLINE);
+
+        assertEquals(expectedCost, obtainedCost, 0.009);
+        /*"0.009" was the selected delta to avoid differences 
+        when rounding prices.*/
+    }
 }

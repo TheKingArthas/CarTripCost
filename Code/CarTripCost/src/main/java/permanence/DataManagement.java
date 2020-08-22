@@ -29,18 +29,15 @@ public class DataManagement {
 
     public static void addFuel(Fuel newFuel) {
         TempDB tempDB = TempDB.getInstance();
-        System.out.println(newFuel);
         tempDB.historicalFuelPrices.add(newFuel);
     }
 
     public static double getFuelCost(FuelType fuelType) {
         TempDB tempDB = TempDB.getInstance();
         Fuel mostUpToDateFuel = tempDB.historicalFuelPrices.get(0);
-        System.out.println(tempDB.historicalFuelPrices.get(0));
+
         double mostUpToDateCost = mostUpToDateFuel.getCost();
-        System.out.println(fuelType);
-        System.out.println(mostUpToDateFuel);
-        System.out.println(mostUpToDateCost);
+
         for (Fuel f : tempDB.historicalFuelPrices) {
             if ((f.getType().equals(fuelType)) && (f.getCostUpdateDate().after(mostUpToDateFuel.getCostUpdateDate()))) {
                 mostUpToDateFuel = f;
@@ -50,5 +47,12 @@ public class DataManagement {
         mostUpToDateCost = mostUpToDateFuel.getCost();
 
         return mostUpToDateCost;
+    }
+
+    public static double getFullFuelTankCost(Car car, FuelType fuelType) {
+        double tankCapacity = car.getTankCapacity();
+        double fuelCostPerLitre = DataManagement.getFuelCost(fuelType);
+
+        return tankCapacity * fuelCostPerLitre;
     }
 }

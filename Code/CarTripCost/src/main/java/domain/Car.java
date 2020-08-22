@@ -7,6 +7,15 @@ package domain;
 public class Car {
 
     private String licensePlate;
+    private double tankCapacity;
+
+    public double getTankCapacity() {
+        return tankCapacity;
+    }
+
+    public void setTankCapacity(double tankCapacity) {
+        this.tankCapacity = tankCapacity;
+    }
 
     public String getLicensePlate() {
         return licensePlate;
