@@ -11,9 +11,16 @@ import static org.junit.Assert.*;
  */
 public class DataManagementTest {
 
+    Car newCar;
+
+    @Before
+    public void setUp() {
+        newCar = new Car();
+    }
+
     @Test
     public void testAddCar() {
-        Car newCar = new Car();
+        newCar = new Car();
 
         DataManagement.addCar(newCar);
 
@@ -22,7 +29,7 @@ public class DataManagementTest {
 
     @Test
     public void testGetCarByLicensePlate() {
-        Car newCar = new Car();
+        newCar = new Car();
         String licensePlate = "ABC1234";
         newCar.setLicensePlate(licensePlate);
 
