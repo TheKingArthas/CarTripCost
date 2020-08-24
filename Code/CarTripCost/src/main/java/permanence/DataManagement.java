@@ -76,4 +76,17 @@ public class DataManagement {
         return requestedToll;
     }
 
+    public static Point getTollCoordinates(String name) {
+        TempDB tempDB = TempDB.getInstance();
+        Point requestedCoordinates = null;
+
+        for (Toll t : tempDB.tolls) {
+            if (t.getName().equals(name)) {
+                requestedCoordinates = t.getCoordinates();
+            }
+        }
+
+        return requestedCoordinates;
+    }
+
 }

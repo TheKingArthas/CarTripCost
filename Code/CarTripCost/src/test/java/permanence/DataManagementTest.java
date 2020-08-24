@@ -132,4 +132,19 @@ public class DataManagementTest {
 
         assertEquals(expectedToll, obtainedToll);
     }
+
+    @Test
+    public void testGetTollCoordinatesByName() {
+        Toll expectedToll = new Toll();
+        Point tollCoordinates = new Point(10, 20);
+        String tollName = "Toll01";
+        expectedToll.setName(tollName);
+        expectedToll.setCoordinates(tollCoordinates);
+
+        DataManagement.addToll(expectedToll);
+
+        Point obtainedCoordinates = DataManagement.getTollCoordinates(tollName);
+
+        assertEquals(tollCoordinates, obtainedCoordinates);
+    }
 }

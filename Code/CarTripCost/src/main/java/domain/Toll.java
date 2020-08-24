@@ -9,6 +9,7 @@ import java.awt.Point;
 public class Toll {
 
     private Point coordinates;
+    private String name;
 
     public Point getCoordinates() {
         return coordinates;
@@ -16,6 +17,14 @@ public class Toll {
 
     public void setCoordinates(Point coordinates) {
         this.coordinates = coordinates;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Toll() {
