@@ -12,10 +12,12 @@ public class TempDB {
     private static TempDB tempDB = null;
     public ArrayList<Car> cars;
     public ArrayList<Fuel> historicalFuelPrices;
+    public ArrayList<Toll> tolls;
 
     private TempDB() {
         cars = new ArrayList<Car>();
         historicalFuelPrices = new ArrayList<Fuel>();
+        tolls = new ArrayList<Toll>();
     }
 
     public static TempDB getInstance() {

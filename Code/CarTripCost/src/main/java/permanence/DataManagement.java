@@ -1,6 +1,7 @@
 package permanence;
 
 import domain.*;
+import java.awt.Point;
 
 /**
  *
@@ -55,4 +56,24 @@ public class DataManagement {
 
         return tankCapacity * fuelCostPerLitre;
     }
+
+    public static void addToll(Toll toll) {
+        TempDB tempDB = TempDB.getInstance();
+
+        tempDB.tolls.add(toll);
+    }
+
+    public static Toll getTollByCoordinates(Point coordinates) {
+        TempDB tempDB = TempDB.getInstance();
+        Toll requestedToll = null;
+
+        for (Toll t : tempDB.tolls) {
+            if (t.getCoordinates().equals(coordinates)) {
+                requestedToll = t;
+            }
+        }
+
+        return requestedToll;
+    }
+
 }

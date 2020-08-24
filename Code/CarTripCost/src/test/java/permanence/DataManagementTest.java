@@ -1,6 +1,7 @@
 package permanence;
 
 import domain.*;
+import java.awt.Point;
 import java.util.Calendar;
 import java.util.Date;
 import org.apache.xerces.impl.dv.xs.FullDVFactory;
@@ -115,5 +116,20 @@ public class DataManagementTest {
     public void testGetCarMaxDistance() {
         double expectedDistance = fuelTankCapacity * carEfficiency;
         double obtainedDistance = newCar.getCarMaxDistance();
+
+        assertEquals(expectedDistance, obtainedDistance, 0.009);
+    }
+
+    @Test
+    public void testGetTollByCoordinates() {
+        Toll expectedToll = new Toll();
+        Point tollCoordinates = new Point(10, 20);
+        expectedToll.setCoordinates(tollCoordinates);
+
+        DataManagement.addToll(expectedToll);
+
+        Toll obtainedToll = DataManagement.getTollByCoordinates(tollCoordinates);
+
+        assertEquals(expectedToll, obtainedToll);
     }
 }
