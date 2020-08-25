@@ -2,9 +2,7 @@ package permanence;
 
 import domain.*;
 import java.awt.Point;
-import java.util.Calendar;
 import java.util.Date;
-import org.apache.xerces.impl.dv.xs.FullDVFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -69,50 +67,6 @@ public class DataManagementTest {
     }
 
     @Test
-    public void testGetFuelGasolineCurrentPrice() {
-        double obtainedPrice = DataManagement.getFuelPrice(FuelType.GASOLINE);
-
-        assertEquals(price, obtainedPrice, 0.009);
-        /*"0.009" was the selected delta to avoid differences 
-        when rounding prices.*/
-    }
-
-    @Test
-    public void testGetFuelMostUpToDatePrice() {
-        Fuel olderFuel = new Fuel();
-        double oldPrice = 9.87;
-        olderFuel.setType(FuelType.GASOLINE);
-        olderFuel.setPrice(oldPrice);
-        Date yesterday = new Date();
-        Calendar c = Calendar.getInstance();
-        c.setTime(yesterday);
-        c.add(Calendar.DATE, -1);
-        yesterday = c.getTime();
-        olderFuel.setPriceUpdateDate(yesterday);
-
-        double newPrice = 12.34;
-        newFuel.setType(FuelType.GASOLINE);
-        newFuel.setPrice(newPrice);
-        newFuel.setPriceUpdateDate(new Date());
-
-        double obtainedPrice = DataManagement.getFuelPrice(FuelType.GASOLINE);
-
-        assertEquals(newPrice, obtainedPrice, 0.009);
-        /*"0.009" was the selected delta to avoid differences 
-        when rounding prices.*/
-    }
-
-    @Test
-    public void testGetCarFullTankPrice() {
-        double expectedPrice = fuelTankCapacity * price;
-        double obtainedPrice = DataManagement.getFullFuelTankPrice(newCar, FuelType.GASOLINE);
-
-        assertEquals(expectedPrice, obtainedPrice, 0.009);
-        /*"0.009" was the selected delta to avoid differences 
-        when rounding prices.*/
-    }
-
-    @Test
     public void testGetCarMaxDistance() {
         double expectedDistance = fuelTankCapacity * carEfficiency;
         double obtainedDistance = newCar.getCarMaxDistance();
@@ -148,15 +102,4 @@ public class DataManagementTest {
         assertEquals(tollCoordinates, obtainedCoordinates);
     }
 
-    @Test
-    public void testUpdateCarCategoryPrice() {
-        double expectedPrice = 100.00;
-        DataManagement.updateCarCategoryPrice(CarCategory.CAT_01, expectedPrice);
-
-        double obtainedPrice = DataManagement.getCarCategoryPrice(CarCategory.CAT_01);
-
-        assertEquals(expectedPrice, obtainedPrice, 0.009);
-        /*"0.009" was the selected delta to avoid differences 
-        when rounding prices.*/
-    }
 }
