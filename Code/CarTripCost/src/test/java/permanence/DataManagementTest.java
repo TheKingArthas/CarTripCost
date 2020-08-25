@@ -20,7 +20,7 @@ public class DataManagementTest {
     String licensePlate;
     double fuelTankCapacity;
     Fuel newFuel;
-    double cost;
+    double price;
     double carEfficiency;
 
     @Before
@@ -34,10 +34,10 @@ public class DataManagementTest {
         newCar.setEfficiency(carEfficiency);
 
         newFuel = new Fuel();
-        cost = 12.34;
+        price = 12.34;
         newFuel.setType(FuelType.GASOLINE);
-        newFuel.setCost(cost);
-        newFuel.setCostUpdateDate(new Date());
+        newFuel.setPrice(price);
+        newFuel.setPriceUpdateDate(new Date());
 
         DataManagement.addCar(newCar);
         DataManagement.addFuel(newFuel);
@@ -69,45 +69,45 @@ public class DataManagementTest {
     }
 
     @Test
-    public void testGetFuelGasolineCurrentCost() {
-        double obtainedCost = DataManagement.getFuelCost(FuelType.GASOLINE);
+    public void testGetFuelGasolineCurrentPrice() {
+        double obtainedPrice = DataManagement.getFuelPrice(FuelType.GASOLINE);
 
-        assertEquals(cost, obtainedCost, 0.009);
+        assertEquals(price, obtainedPrice, 0.009);
         /*"0.009" was the selected delta to avoid differences 
         when rounding prices.*/
     }
 
     @Test
-    public void testGetFuelMostUpToDateCost() {
+    public void testGetFuelMostUpToDatePrice() {
         Fuel olderFuel = new Fuel();
-        double oldCost = 9.87;
+        double oldPrice = 9.87;
         olderFuel.setType(FuelType.GASOLINE);
-        olderFuel.setCost(oldCost);
+        olderFuel.setPrice(oldPrice);
         Date yesterday = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(yesterday);
         c.add(Calendar.DATE, -1);
         yesterday = c.getTime();
-        olderFuel.setCostUpdateDate(yesterday);
+        olderFuel.setPriceUpdateDate(yesterday);
 
-        double newCost = 12.34;
+        double newPrice = 12.34;
         newFuel.setType(FuelType.GASOLINE);
-        newFuel.setCost(newCost);
-        newFuel.setCostUpdateDate(new Date());
+        newFuel.setPrice(newPrice);
+        newFuel.setPriceUpdateDate(new Date());
 
-        double obtainedCost = DataManagement.getFuelCost(FuelType.GASOLINE);
+        double obtainedPrice = DataManagement.getFuelPrice(FuelType.GASOLINE);
 
-        assertEquals(newCost, obtainedCost, 0.009);
+        assertEquals(newPrice, obtainedPrice, 0.009);
         /*"0.009" was the selected delta to avoid differences 
         when rounding prices.*/
     }
 
     @Test
-    public void testGetCarFullTankCost() {
-        double expectedCost = fuelTankCapacity * cost;
-        double obtainedCost = DataManagement.getFullFuelTankCost(newCar, FuelType.GASOLINE);
+    public void testGetCarFullTankPrice() {
+        double expectedPrice = fuelTankCapacity * price;
+        double obtainedPrice = DataManagement.getFullFuelTankPrice(newCar, FuelType.GASOLINE);
 
-        assertEquals(expectedCost, obtainedCost, 0.009);
+        assertEquals(expectedPrice, obtainedPrice, 0.009);
         /*"0.009" was the selected delta to avoid differences 
         when rounding prices.*/
     }
@@ -150,12 +150,12 @@ public class DataManagementTest {
 
     @Test
     public void testUpdateCarCategoryPrice() {
-        double expectedCost = 100.00;
-        DataManagement.updateCarCategoryPrice(CarCategory.CAT_01, expectedCost);
+        double expectedPrice = 100.00;
+        DataManagement.updateCarCategoryPrice(CarCategory.CAT_01, expectedPrice);
 
-        double obtainedCost = DataManagement.getCarCategoryPrice(CarCategory.CAT_01);
+        double obtainedPrice = DataManagement.getCarCategoryPrice(CarCategory.CAT_01);
 
-        assertEquals(expectedCost, obtainedCost, 0.009);
+        assertEquals(expectedPrice, obtainedPrice, 0.009);
         /*"0.009" was the selected delta to avoid differences 
         when rounding prices.*/
     }

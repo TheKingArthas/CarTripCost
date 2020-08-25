@@ -34,28 +34,28 @@ public class DataManagement {
         tempDB.historicalFuelPrices.add(newFuel);
     }
 
-    public static double getFuelCost(FuelType fuelType) {
+    public static double getFuelPrice(FuelType fuelType) {
         TempDB tempDB = TempDB.getInstance();
         Fuel mostUpToDateFuel = tempDB.historicalFuelPrices.get(0);
 
-        double mostUpToDateCost = mostUpToDateFuel.getCost();
+        double mostUpToDatePrice = mostUpToDateFuel.getPrice();
 
         for (Fuel f : tempDB.historicalFuelPrices) {
-            if ((f.getType().equals(fuelType)) && (f.getCostUpdateDate().after(mostUpToDateFuel.getCostUpdateDate()))) {
+            if ((f.getType().equals(fuelType)) && (f.getPriceUpdateDate().after(mostUpToDateFuel.getPriceUpdateDate()))) {
                 mostUpToDateFuel = f;
             }
         }
 
-        mostUpToDateCost = mostUpToDateFuel.getCost();
+        mostUpToDatePrice = mostUpToDateFuel.getPrice();
 
-        return mostUpToDateCost;
+        return mostUpToDatePrice;
     }
 
-    public static double getFullFuelTankCost(Car car, FuelType fuelType) {
+    public static double getFullFuelTankPrice(Car car, FuelType fuelType) {
         double tankCapacity = car.getTankCapacity();
-        double fuelCostPerLitre = DataManagement.getFuelCost(fuelType);
+        double fuelPricePerLitre = DataManagement.getFuelPrice(fuelType);
 
-        return tankCapacity * fuelCostPerLitre;
+        return tankCapacity * fuelPricePerLitre;
     }
 
     public static void addToll(Toll toll) {
@@ -90,12 +90,12 @@ public class DataManagement {
         return requestedCoordinates;
     }
 
-    public static void updateCarCategoryPrice(CarCategory carCategory, double expectedCost) {
+    public static void updateCarCategoryPrice(CarCategory carCategory, double expectedPrice) {
         TempDB tempDB = TempDB.getInstance();
 
         CarCategoryPrice carCategoryPrice = new CarCategoryPrice();
         carCategoryPrice.setCategory(carCategory);
-        carCategoryPrice.setPrice(expectedCost);
+        carCategoryPrice.setPrice(expectedPrice);
         carCategoryPrice.setUpdateDate(new Date());
 
         tempDB.historicalCarCateogriesPrices.add(carCategoryPrice);

@@ -9,23 +9,23 @@ import java.util.Date;
 public class Fuel {
 
     private FuelType type;
-    private double cost;
-    private Date costUpdateDate;
+    private double price;
+    private Date priceUpdateDate;
 
-    public double getCost() {
-        return cost;
+    public double getPrice() {
+        return price;
     }
 
-    public void setCost(double cost) {
-        this.cost = cost;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
-    public Date getCostUpdateDate() {
-        return costUpdateDate;
+    public Date getPriceUpdateDate() {
+        return priceUpdateDate;
     }
 
-    public void setCostUpdateDate(Date costUpdateDate) {
-        this.costUpdateDate = costUpdateDate;
+    public void setPriceUpdateDate(Date priceUpdateDate) {
+        this.priceUpdateDate = priceUpdateDate;
     }
 
     public FuelType getType() {
