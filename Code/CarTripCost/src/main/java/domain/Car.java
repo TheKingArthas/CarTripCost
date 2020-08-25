@@ -7,17 +7,11 @@ package domain;
 public class Car {
 
     private String licensePlate;
+    private String brand;
+    private String model;
     private double tankCapacity;
     private double efficiency;
     private CarCategory category;
-
-    public double getTankCapacity() {
-        return tankCapacity;
-    }
-
-    public void setTankCapacity(double tankCapacity) {
-        this.tankCapacity = tankCapacity;
-    }
 
     public String getLicensePlate() {
         return licensePlate;
@@ -25,6 +19,30 @@ public class Car {
 
     public void setLicensePlate(String licensePlate) {
         this.licensePlate = licensePlate;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public double getTankCapacity() {
+        return tankCapacity;
+    }
+
+    public void setTankCapacity(double tankCapacity) {
+        this.tankCapacity = tankCapacity;
     }
 
     public double getEfficiency() {
