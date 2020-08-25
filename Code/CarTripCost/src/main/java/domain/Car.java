@@ -9,6 +9,7 @@ public class Car {
     private String licensePlate;
     private double tankCapacity;
     private double efficiency;
+    private CarCategory category;
 
     public double getTankCapacity() {
         return tankCapacity;
@@ -34,6 +35,14 @@ public class Car {
         this.efficiency = efficiency;
     }
 
+    public CarCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(CarCategory category) {
+        this.category = category;
+    }
+
     public double getCarMaxDistance() {
         double tankCapacity = this.getTankCapacity();
         double carEfficiency = this.getEfficiency();
@@ -42,6 +51,5 @@ public class Car {
     }
 
     public Car() {
-        this.licensePlate = licensePlate;
     }
 }

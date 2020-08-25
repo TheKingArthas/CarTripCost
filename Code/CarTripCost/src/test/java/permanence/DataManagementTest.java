@@ -147,4 +147,16 @@ public class DataManagementTest {
 
         assertEquals(tollCoordinates, obtainedCoordinates);
     }
+
+    @Test
+    public void testUpdateCarCategoryPrice() {
+        double expectedCost = 100.00;
+        DataManagement.updateCarCategoryPrice(CarCategory.CAT_01, expectedCost);
+
+        double obtainedCost = DataManagement.getCarCategoryPrice(CarCategory.CAT_01);
+
+        assertEquals(expectedCost, obtainedCost, 0.009);
+        /*"0.009" was the selected delta to avoid differences 
+        when rounding prices.*/
+    }
 }

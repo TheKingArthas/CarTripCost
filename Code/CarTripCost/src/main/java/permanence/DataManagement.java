@@ -2,6 +2,7 @@ package permanence;
 
 import domain.*;
 import java.awt.Point;
+import java.util.Date;
 
 /**
  *
@@ -89,4 +90,30 @@ public class DataManagement {
         return requestedCoordinates;
     }
 
+    public static void updateCarCategoryPrice(CarCategory carCategory, double expectedCost) {
+        TempDB tempDB = TempDB.getInstance();
+
+        CarCategoryPrice carCategoryPrice = new CarCategoryPrice();
+        carCategoryPrice.setCategory(carCategory);
+        carCategoryPrice.setPrice(expectedCost);
+        carCategoryPrice.setUpdateDate(new Date());
+
+        tempDB.historicalCarCateogriesPrices.add(carCategoryPrice);
+    }
+
+    public static double getCarCategoryPrice(CarCategory carCategory) {
+        TempDB tempDB = TempDB.getInstance();
+        CarCategoryPrice mostUpToDateCarCategoryPrice = tempDB.historicalCarCateogriesPrices.get(0);
+
+        for (CarCategoryPrice ccp : tempDB.historicalCarCateogriesPrices) {
+
+            if ((ccp.getCategory().equals(carCategory)) && (ccp.getUpdateDate().after(mostUpToDateCarCategoryPrice.getUpdateDate()))) {
+                mostUpToDateCarCategoryPrice = ccp;
+            }
+        }
+
+        double mostUpToDatePrice = mostUpToDateCarCategoryPrice.getPrice();
+
+        return mostUpToDatePrice;
+    }
 }
