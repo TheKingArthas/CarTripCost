@@ -1,6 +1,7 @@
 package logic;
 
 import domain.*;
+import java.awt.Point;
 import java.util.Calendar;
 import java.util.Date;
 import org.junit.After;
@@ -8,7 +9,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import permanence.DataManagement;
-import permanence.DataManagementTest;
 import permanence.TempDB;
 
 /**
@@ -23,6 +23,9 @@ public class PriceManagementTest {
     Fuel newFuel;
     double price;
     double carEfficiency;
+    Point origin;
+    Point destiny;
+    Travel newTravel;
 
     @Before
     public void setUp() {
@@ -33,6 +36,7 @@ public class PriceManagementTest {
         newCar.setTankCapacity(fuelTankCapacity);
         carEfficiency = 16;
         newCar.setEfficiency(carEfficiency);
+        newCar.setCategory(CarCategory.CAT_01);
 
         newFuel = new Fuel();
         price = 12.34;
@@ -40,8 +44,16 @@ public class PriceManagementTest {
         newFuel.setPrice(price);
         newFuel.setPriceUpdateDate(new Date());
 
+        newTravel = new Travel();
+        origin = new Point(10, 20);
+        destiny = new Point(30, 40);
+        newTravel.setOrigin(origin);
+        newTravel.setDestiny(destiny);
+        newTravel.setCar(newCar);
+
         DataManagement.addCar(newCar);
         DataManagement.addFuel(newFuel);
+        DataManagement.addTravel(newTravel);
     }
 
     @After
@@ -50,6 +62,9 @@ public class PriceManagementTest {
 
         tempDB.cars.clear();
         tempDB.historicalFuelPrices.clear();
+        tempDB.tolls.clear();
+        tempDB.historicalCarCateogriesPrices.clear();
+        tempDB.travels.clear();
     }
 
     @Test
@@ -101,4 +116,19 @@ public class PriceManagementTest {
         when rounding prices.*/
     }
 
+    @Test
+    public void testGetTollsTotalCosts() {
+        newTravel.addToll(new Toll());
+        newTravel.addToll(new Toll());
+        newTravel.addToll(new Toll());
+        
+        PriceManagement.updateCarCategoryPrice(CarCategory.CAT_01, 100.00);
+
+        double expectedPrice = (PriceManagement.getCarCategoryPrice(newCar.getCategory()) * 3);
+        System.out.println(expectedPrice);
+        double obtainedPrice = PriceManagement.getTravelTollsTotalCost(newTravel);
+        System.out.println(obtainedPrice);
+
+        assertEquals(expectedPrice, obtainedPrice, 0.009);
+    }
 }

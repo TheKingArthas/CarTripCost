@@ -13,6 +13,7 @@ public class Travel {
     private Point destiny;
     private double distance;
     private ArrayList<Toll> tolls;
+    private Car car;
 
     public Point getOrigin() {
         return origin;
@@ -40,6 +41,14 @@ public class Travel {
 
     public void addToll(Toll toll) {
         this.tolls.add(toll);
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
     }
 
     public Travel() {

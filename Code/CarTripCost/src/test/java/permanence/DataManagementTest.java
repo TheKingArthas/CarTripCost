@@ -46,10 +46,10 @@ public class DataManagementTest {
         newTravel.setOrigin(origin);
         newTravel.setDestiny(destiny);
 
-        DataManagement.addTravel(newTravel);
-
         DataManagement.addCar(newCar);
         DataManagement.addFuel(newFuel);
+        DataManagement.addTravel(newTravel);
+
     }
 
     @After

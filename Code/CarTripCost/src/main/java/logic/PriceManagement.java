@@ -5,6 +5,7 @@ import domain.CarCategory;
 import domain.CarCategoryPrice;
 import domain.Fuel;
 import domain.FuelType;
+import domain.Travel;
 import java.util.Date;
 import permanence.TempDB;
 
@@ -53,5 +54,11 @@ public class PriceManagement {
         carCategoryPrice.setUpdateDate(new Date());
         tempDB.historicalCarCateogriesPrices.add(carCategoryPrice);
     }
-    
+
+    public static double getTravelTollsTotalCost(Travel travel) {
+        int tollsQuantity = travel.getTolls().size();
+        double perTollCost = getCarCategoryPrice(travel.getCar().getCategory());
+
+        return perTollCost * tollsQuantity;
+    }
 }
