@@ -102,4 +102,21 @@ public class DataManagementTest {
         assertEquals(tollCoordinates, obtainedCoordinates);
     }
 
+    @Test
+    public void testGetTravelDistance() {
+
+        Travel travel = new Travel();
+
+        Point origin = new Point(10, 20);
+        Point destiny = new Point(30, 40);
+        travel.setOrigin(origin);
+        travel.setDestiny(destiny);
+
+        DataManagement.addTravel(travel);
+
+        double expectedDistance = origin.distance(destiny);
+        double obtainedDistance = travel.getDistance();
+
+        assertEquals(expectedDistance, obtainedDistance, 0.009);
+    }
 }

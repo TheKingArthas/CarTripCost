@@ -65,4 +65,9 @@ public class DataManagement {
         return requestedCoordinates;
     }
 
+    public static void addTravel(Travel travel) {
+        TempDB tempDB = TempDB.getInstance();
+
+        tempDB.travels.add(travel);
+    }
 }
