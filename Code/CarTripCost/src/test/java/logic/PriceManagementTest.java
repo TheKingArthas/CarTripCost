@@ -117,7 +117,7 @@ public class PriceManagementTest {
     }
 
     @Test
-    public void testGetTollsTotalCosts() {
+    public void testGetTollsTotalPrices() {
         newTravel.addToll(new Toll());
         newTravel.addToll(new Toll());
         newTravel.addToll(new Toll());
@@ -135,7 +135,7 @@ public class PriceManagementTest {
     }
 
     @Test
-    public void testGetTravelTotalCost() {
+    public void testGetTravelTotalPrice() {
         newTravel.addToll(new Toll());
         newTravel.addToll(new Toll());
         newTravel.addToll(new Toll());
