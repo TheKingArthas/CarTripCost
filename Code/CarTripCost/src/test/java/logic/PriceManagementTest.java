@@ -121,7 +121,7 @@ public class PriceManagementTest {
         newTravel.addToll(new Toll());
         newTravel.addToll(new Toll());
         newTravel.addToll(new Toll());
-        
+
         PriceManagement.updateCarCategoryPrice(CarCategory.CAT_01, 100.00);
 
         double expectedPrice = (PriceManagement.getCarCategoryPrice(newCar.getCategory()) * 3);
@@ -130,5 +130,28 @@ public class PriceManagementTest {
         System.out.println(obtainedPrice);
 
         assertEquals(expectedPrice, obtainedPrice, 0.009);
+        /*"0.009" was the selected delta to avoid differences
+        when rounding prices.*/
+    }
+
+    @Test
+    public void testGetTravelTotalCost() {
+        newTravel.addToll(new Toll());
+        newTravel.addToll(new Toll());
+        newTravel.addToll(new Toll());
+
+        PriceManagement.updateCarCategoryPrice(CarCategory.CAT_01, 100.00);
+
+        double distanceToTravel = newTravel.getDistance();
+        double fullTankPrice = PriceManagement.getFullFuelTankPrice(newCar, newCar.getFuelType());
+        double carMaxDistance = newCar.getCarMaxDistance();
+        double tollsTotalCost = PriceManagement.getTravelTollsTotalCost(newTravel);
+
+        double expectedPrice = (distanceToTravel * fullTankPrice / carMaxDistance) + tollsTotalCost;
+        double obtainedPrice = PriceManagement.getTravelTotalCost(newTravel);
+
+        assertEquals(expectedPrice, obtainedPrice, 0.009);
+        /*"0.009" was the selected delta to avoid differences
+        when rounding prices.*/
     }
 }

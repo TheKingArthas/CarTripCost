@@ -9,6 +9,7 @@ public class Car {
     private String licensePlate;
     private String brand;
     private String model;
+    private FuelType fuelType;
     private double tankCapacity;
     private double efficiency;
     private CarCategory category;
@@ -35,6 +36,14 @@ public class Car {
 
     public void setModel(String model) {
         this.model = model;
+    }
+
+    public FuelType getFuelType() {
+        return fuelType;
+    }
+
+    public void setFuelType(FuelType fuelType) {
+        this.fuelType = fuelType;
     }
 
     public double getTankCapacity() {

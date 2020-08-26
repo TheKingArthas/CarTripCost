@@ -61,4 +61,13 @@ public class PriceManagement {
 
         return perTollCost * tollsQuantity;
     }
+
+    static double getTravelTotalCost(Travel travel) {
+        double distanceToTravel = travel.getDistance();
+        double fullTankPrice = getFullFuelTankPrice(travel.getCar(), travel.getCar().getFuelType());
+        double carMaxDistance = travel.getCar().getCarMaxDistance();
+        double tollsTotalCost = getTravelTollsTotalCost(travel);
+
+        return ((distanceToTravel * fullTankPrice / carMaxDistance) + tollsTotalCost);
+    }
 }
