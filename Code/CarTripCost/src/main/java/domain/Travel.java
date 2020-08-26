@@ -14,6 +14,7 @@ public class Travel {
     private double distance;
     private ArrayList<Toll> tolls;
     private Car car;
+    private int passengersQuantity;
 
     public Point getOrigin() {
         return origin;
@@ -49,6 +50,14 @@ public class Travel {
 
     public void setCar(Car car) {
         this.car = car;
+    }
+
+    public int getPassengersQuantity() {
+        return passengersQuantity;
+    }
+
+    public void setPassengersQuantity(int passengersQuantity) {
+        this.passengersQuantity = passengersQuantity;
     }
 
     public Travel() {

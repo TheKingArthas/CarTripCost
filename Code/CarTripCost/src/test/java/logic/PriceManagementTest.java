@@ -154,4 +154,23 @@ public class PriceManagementTest {
         /*"0.009" was the selected delta to avoid differences
         when rounding prices.*/
     }
+
+    @Test
+    public void testGetTravelPerPassengerPrice() {
+        newTravel.addToll(new Toll());
+        newTravel.addToll(new Toll());
+        newTravel.addToll(new Toll());
+        
+        newTravel.setPassengersQuantity(4);
+
+        PriceManagement.updateCarCategoryPrice(CarCategory.CAT_01, 100.00);
+
+        double travelTotalCost = PriceManagement.getTravelTotalCost(newTravel);
+        int passengersQuantity = newTravel.getPassengersQuantity();
+
+        double expectedPrice = travelTotalCost / passengersQuantity;
+        double obtainedPrice = PriceManagement.getTravelPerPassengerPrice(newTravel);
+
+        assertEquals(expectedPrice, obtainedPrice, 0.009);
+    }
 }

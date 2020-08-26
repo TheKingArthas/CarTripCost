@@ -70,4 +70,11 @@ public class PriceManagement {
 
         return ((distanceToTravel * fullTankPrice / carMaxDistance) + tollsTotalCost);
     }
+
+    static double getTravelPerPassengerPrice(Travel travel) {
+        double travelTotalCost = getTravelTotalCost(travel);
+        int passengersQuantity = travel.getPassengersQuantity();
+
+        return travelTotalCost / passengersQuantity;
+    }
 }
