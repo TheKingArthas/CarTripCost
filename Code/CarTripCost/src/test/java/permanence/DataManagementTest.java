@@ -47,6 +47,9 @@ public class DataManagementTest {
 
         tempDB.cars.clear();
         tempDB.historicalFuelPrices.clear();
+        tempDB.tolls.clear();
+        tempDB.historicalCarCateogriesPrices.clear();
+        tempDB.travels.clear();
     }
 
     @Test
