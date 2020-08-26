@@ -26,6 +26,9 @@ public class PriceManagementTest {
     Point origin;
     Point destiny;
     Travel newTravel;
+    Toll newTollA;
+    Toll newTollB;
+    Toll newTollC;
 
     @Before
     public void setUp() {
@@ -44,16 +47,33 @@ public class PriceManagementTest {
         newFuel.setPrice(price);
         newFuel.setPriceUpdateDate(new Date());
 
+        newTollA = new Toll();
+        newTollA.setCoordinates(new Point(11, 21));
+        newTollA.setName("Toll A");
+        newTollB = new Toll();
+        newTollB.setCoordinates(new Point(12, 22));
+        newTollA.setName("Toll B");
+        newTollC = new Toll();
+        newTollC.setCoordinates(new Point(13, 23));
+        newTollA.setName("Toll C");
+
         newTravel = new Travel();
         origin = new Point(10, 20);
         destiny = new Point(30, 40);
         newTravel.setOrigin(origin);
         newTravel.setDestiny(destiny);
         newTravel.setCar(newCar);
+        newTravel.setPassengersQuantity(4);
+
+        newTravel.addToll(newTollA);
+        newTravel.addToll(newTollB);
+        newTravel.addToll(newTollC);
 
         DataManagement.addCar(newCar);
         DataManagement.addFuel(newFuel);
         DataManagement.addTravel(newTravel);
+
+        PriceManagement.updateCarCategoryPrice(CarCategory.CAT_01, 100.00);
     }
 
     @After
@@ -118,12 +138,6 @@ public class PriceManagementTest {
 
     @Test
     public void testGetTollsTotalPrices() {
-        newTravel.addToll(new Toll());
-        newTravel.addToll(new Toll());
-        newTravel.addToll(new Toll());
-
-        PriceManagement.updateCarCategoryPrice(CarCategory.CAT_01, 100.00);
-
         double expectedPrice = (PriceManagement.getCarCategoryPrice(newCar.getCategory()) * 3);
         System.out.println(expectedPrice);
         double obtainedPrice = PriceManagement.getTravelTollsTotalCost(newTravel);
@@ -136,12 +150,6 @@ public class PriceManagementTest {
 
     @Test
     public void testGetTravelTotalPrice() {
-        newTravel.addToll(new Toll());
-        newTravel.addToll(new Toll());
-        newTravel.addToll(new Toll());
-
-        PriceManagement.updateCarCategoryPrice(CarCategory.CAT_01, 100.00);
-
         double distanceToTravel = newTravel.getDistance();
         double fullTankPrice = PriceManagement.getFullFuelTankPrice(newCar);
         double carMaxDistance = newCar.getCarMaxDistance();
@@ -157,14 +165,6 @@ public class PriceManagementTest {
 
     @Test
     public void testGetTravelPerPassengerPrice() {
-        newTravel.addToll(new Toll());
-        newTravel.addToll(new Toll());
-        newTravel.addToll(new Toll());
-        
-        newTravel.setPassengersQuantity(4);
-
-        PriceManagement.updateCarCategoryPrice(CarCategory.CAT_01, 100.00);
-
         double travelTotalCost = PriceManagement.getTravelTotalCost(newTravel);
         int passengersQuantity = newTravel.getPassengersQuantity();
 
