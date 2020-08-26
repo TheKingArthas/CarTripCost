@@ -2,6 +2,7 @@ package domain;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -9,12 +10,21 @@ import java.util.ArrayList;
  */
 public class Travel {
 
+    private Date date;
     private Point origin;
     private Point destiny;
     private double distance;
     private ArrayList<Toll> tolls;
     private Car car;
     private int passengersQuantity;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     public Point getOrigin() {
         return origin;
