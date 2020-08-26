@@ -20,6 +20,9 @@ public class DataManagementTest {
     Fuel newFuel;
     double price;
     double carEfficiency;
+    Point origin;
+    Point destiny;
+    Travel newTravel;
 
     @Before
     public void setUp() {
@@ -36,6 +39,14 @@ public class DataManagementTest {
         newFuel.setType(FuelType.GASOLINE);
         newFuel.setPrice(price);
         newFuel.setPriceUpdateDate(new Date());
+
+        newTravel = new Travel();
+        origin = new Point(10, 20);
+        destiny = new Point(30, 40);
+        newTravel.setOrigin(origin);
+        newTravel.setDestiny(destiny);
+
+        DataManagement.addTravel(newTravel);
 
         DataManagement.addCar(newCar);
         DataManagement.addFuel(newFuel);
@@ -107,19 +118,18 @@ public class DataManagementTest {
 
     @Test
     public void testGetTravelDistance() {
-
-        Travel travel = new Travel();
-
-        Point origin = new Point(10, 20);
-        Point destiny = new Point(30, 40);
-        travel.setOrigin(origin);
-        travel.setDestiny(destiny);
-
-        DataManagement.addTravel(travel);
-
         double expectedDistance = origin.distance(destiny);
-        double obtainedDistance = travel.getDistance();
+        double obtainedDistance = newTravel.getDistance();
 
         assertEquals(expectedDistance, obtainedDistance, 0.009);
+    }
+
+    @Test
+    public void testAddTollToTravel() {
+        Toll newToll = new Toll();
+
+        newTravel.addToll(newToll);
+
+        assertTrue(newTravel.getTolls().contains(newToll));
     }
 }

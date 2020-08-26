@@ -1,6 +1,7 @@
 package domain;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 /**
  *
@@ -11,6 +12,7 @@ public class Travel {
     private Point origin;
     private Point destiny;
     private double distance;
+    private ArrayList<Toll> tolls;
 
     public Point getOrigin() {
         return origin;
@@ -32,7 +34,15 @@ public class Travel {
         return Math.abs(origin.distance(destiny));
     }
 
-    public Travel() {
+    public ArrayList<Toll> getTolls() {
+        return tolls;
+    }
 
+    public void addToll(Toll toll) {
+        this.tolls.add(toll);
+    }
+
+    public Travel() {
+        tolls = new ArrayList<Toll>();
     }
 }
