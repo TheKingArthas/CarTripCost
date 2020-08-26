@@ -110,7 +110,7 @@ public class PriceManagementTest {
     @Test
     public void testGetCarFullTankPrice() {
         double expectedPrice = fuelTankCapacity * price;
-        double obtainedPrice = PriceManagement.getFullFuelTankPrice(newCar, FuelType.GASOLINE);
+        double obtainedPrice = PriceManagement.getFullFuelTankPrice(newCar);
         assertEquals(expectedPrice, obtainedPrice, 0.009);
         /*"0.009" was the selected delta to avoid differences
         when rounding prices.*/
@@ -143,7 +143,7 @@ public class PriceManagementTest {
         PriceManagement.updateCarCategoryPrice(CarCategory.CAT_01, 100.00);
 
         double distanceToTravel = newTravel.getDistance();
-        double fullTankPrice = PriceManagement.getFullFuelTankPrice(newCar, newCar.getFuelType());
+        double fullTankPrice = PriceManagement.getFullFuelTankPrice(newCar);
         double carMaxDistance = newCar.getCarMaxDistance();
         double tollsTotalCost = PriceManagement.getTravelTollsTotalCost(newTravel);
 

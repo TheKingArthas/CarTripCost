@@ -27,9 +27,9 @@ public class PriceManagement {
         return mostUpToDatePrice;
     }
 
-    public static double getFullFuelTankPrice(Car car, FuelType fuelType) {
+    public static double getFullFuelTankPrice(Car car) {
         double tankCapacity = car.getTankCapacity();
-        double fuelPricePerLitre = PriceManagement.getFuelPrice(fuelType);
+        double fuelPricePerLitre = PriceManagement.getFuelPrice(car.getFuelType());
         return tankCapacity * fuelPricePerLitre;
     }
 
@@ -64,7 +64,7 @@ public class PriceManagement {
 
     static double getTravelTotalCost(Travel travel) {
         double distanceToTravel = travel.getDistance();
-        double fullTankPrice = getFullFuelTankPrice(travel.getCar(), travel.getCar().getFuelType());
+        double fullTankPrice = getFullFuelTankPrice(travel.getCar());
         double carMaxDistance = travel.getCar().getCarMaxDistance();
         double tollsTotalCost = getTravelTollsTotalCost(travel);
 
