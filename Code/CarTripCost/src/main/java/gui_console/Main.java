@@ -114,8 +114,7 @@ public class Main {
             space();
             System.out.println("1) Add new car");
             if (systemHasCars) {
-                System.out.println("2) Select car");
-                System.out.println("3) Edit current car");
+                System.out.println("2) List cars");
             }
             space();
             System.out.println("0) Go back");
@@ -123,12 +122,13 @@ public class Main {
             space();
             int selection = selectOption();
 
-            if (selection == 1 || selection == 0 || (systemHasCars && (selection == 2 || selection == 3))) {
+            if (selection == 1 || selection == 0 || (systemHasCars && (selection == 2))) {
                 switch (selection) {
                     case 1:
                         addNewCar();
                         break;
                     case 2:
+                        listCars();
                         break;
                     case 3:
                         break;
@@ -203,7 +203,8 @@ public class Main {
                     confirmed = true;
 
                     System.out.print("Car successfully added. Press enter to continue.");
-                    System.out.println("");
+                    scan.nextLine();
+                    scan.nextLine();
                     break;
                 case 'N':
                     errorMessage = "";
@@ -219,6 +220,19 @@ public class Main {
             }
         }
         mainMenu();
+    }
+
+    private static void listCars() {
+        Scanner scan = new Scanner(System.in);
+        cleanScreen();
+
+        System.out.println("LICENSE PLATE | BRAND | MODEL |");
+        for (Car c : tempDB.cars) {
+            System.out.println("| " + c.getLicensePlate() + " | " + c.getBrand() + " | " + c.getModel() + " |");
+        }
+        space();
+        System.out.print("Press enter to continue.");
+        scan.nextLine();
     }
 
     public static void main(String[] args) {
