@@ -160,7 +160,7 @@ public class Main {
         String licensePlate = "";
         String brand = "";
         String model = "";
-        FuelType fuelType;
+        FuelType fuelType = FuelType.GASOLINE;
         double tankCapacity = 0;
         double efficiency = 0;
         CarCategory category;
@@ -203,6 +203,7 @@ public class Main {
                     newCar.setLicensePlate(licensePlate);
                     newCar.setBrand(brand);
                     newCar.setModel(model);
+                    newCar.setFuelType(fuelType);
                     newCar.setTankCapacity(tankCapacity);
                     newCar.setEfficiency(efficiency);
                     DataManagement.addCar(newCar);
