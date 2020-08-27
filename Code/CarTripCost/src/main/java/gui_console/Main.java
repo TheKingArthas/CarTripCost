@@ -74,6 +74,42 @@ public class Main {
         return selectedFuelType;
     }
 
+    private static CarCategory carCategorySelector() {
+        Scanner scan = new Scanner(System.in);
+        int selection = 0;
+        CarCategory selectedCarCategory;
+
+        while (selection < 1 || 7 < selection) {
+            System.out.println("(1) " + CarCategory.CAT_01.description);
+            System.out.println("(2) " + CarCategory.CAT_02.description);
+            System.out.println("(3) " + CarCategory.CAT_03.description);
+            System.out.println("(4) " + CarCategory.CAT_04.description);
+            System.out.println("(5) " + CarCategory.CAT_05.description);
+            System.out.println("(6) " + CarCategory.CAT_06.description);
+            System.out.println("(7) " + CarCategory.CAT_07.description);
+
+            selection = scan.nextInt();
+        }
+
+        if (selection == 1) {
+            selectedCarCategory = CarCategory.CAT_01;
+        } else if (selection == 2) {
+            selectedCarCategory = CarCategory.CAT_02;
+        } else if (selection == 3) {
+            selectedCarCategory = CarCategory.CAT_03;
+        } else if (selection == 4) {
+            selectedCarCategory = CarCategory.CAT_04;
+        } else if (selection == 5) {
+            selectedCarCategory = CarCategory.CAT_05;
+        } else if (selection == 6) {
+            selectedCarCategory = CarCategory.CAT_06;
+        } else {
+            selectedCarCategory = CarCategory.CAT_07;
+        }
+
+        return selectedCarCategory;
+    }
+
     private static void mainMenu() {
         boolean exitProgram = false;
         String errorMessage = "";
@@ -163,7 +199,7 @@ public class Main {
         FuelType fuelType = FuelType.GASOLINE;
         double tankCapacity = 0;
         double efficiency = 0;
-        CarCategory category;
+        CarCategory category = CarCategory.CAT_01;
 
         while (!confirmed) {
             cleanScreen();
@@ -190,9 +226,20 @@ public class Main {
                 System.out.println("");
                 System.out.print("6) Efficiency (Km/L): ");
                 efficiency = scan.nextDouble();
+                System.out.println("");
+                System.out.println("7) Car category: ");
+                category = carCategorySelector();
+
                 completedForm = true;
             }
-
+            cleanScreen();
+            System.out.println("1) License plate: " + licensePlate);
+            System.out.println("2) Brand: " + brand);
+            System.out.println("3) Model: " + model);
+            System.out.println("4) Fuel type: " + fuelType);
+            System.out.println("5) Tank capacity " + tankCapacity + "(L)");
+            System.out.println("6) Efficiency " + efficiency + "(Km/L): ");
+            System.out.println("7) Car category: " + category);
             space();
             System.out.println("Are these values correct?");
             confirmation = confirmSubMenu();
@@ -206,6 +253,8 @@ public class Main {
                     newCar.setFuelType(fuelType);
                     newCar.setTankCapacity(tankCapacity);
                     newCar.setEfficiency(efficiency);
+                    newCar.setCategory(category);
+
                     DataManagement.addCar(newCar);
 
                     confirmed = true;
