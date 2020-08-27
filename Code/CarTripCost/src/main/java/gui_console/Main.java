@@ -76,10 +76,13 @@ public class Main {
 
     private static void mainMenu() {
         boolean exitProgram = false;
+        String errorMessage = "";
 
         while (!exitProgram) {
             cleanScreen();
             System.out.println("<<<CAR-TRIP-PRICE>>>");
+            System.out.println("<<<Main menu>>>");
+            System.out.println(errorMessage);
             space();
             System.out.println("1) New travel");
             System.out.println("2) Car management");
@@ -91,13 +94,17 @@ public class Main {
             space();
             int selection = selectOption();
 
-            switch (selection) {
-                case 2:
-                    carManagement();
-                    break;
-                case 0:
-                    System.exit(0);
-                    break;
+            if (0 <= selection || selection <= 4) {
+                switch (selection) {
+                    case 2:
+                        carManagement();
+                        break;
+                    case 0:
+                        System.exit(0);
+                        break;
+                }
+            } else {
+                errorMessage = "\"" + selection + "\" isn't a valid option. Please try again.";
             }
         }
     }
