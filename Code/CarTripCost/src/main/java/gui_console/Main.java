@@ -5,7 +5,11 @@
  */
 package gui_console;
 
+import domain.Car;
+import domain.CarCategory;
+import domain.FuelType;
 import java.util.Scanner;
+import permanence.DataManagement;
 import permanence.TempDB;
 
 /**
@@ -37,6 +41,39 @@ public class Main {
         return selecction;
     }
 
+    private static char confirmSubMenu() {
+        char confirmation;
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("Yes (Y) | No (N) | Back to main menu (M)");
+
+        confirmation = scan.nextLine().charAt(0);
+        confirmation = java.lang.Character.toUpperCase(confirmation);
+
+        return confirmation;
+    }
+
+    private static FuelType fuelTypeSelector() {
+        Scanner scan = new Scanner(System.in);
+        int selection = 0;
+        FuelType selectedFuelType;
+
+        while (selection < 1 || 3 < selection) {
+            System.out.println("(1) Gasoline | (2) Premium | (3) Super");
+            selection = scan.nextInt();
+        }
+
+        if (selection == 1) {
+            selectedFuelType = FuelType.GASOLINE;
+        } else if (selection == 2) {
+            selectedFuelType = FuelType.PREMIUM;
+        } else {
+            selectedFuelType = FuelType.SUPER;
+        }
+
+        return selectedFuelType;
+    }
+
     private static void mainMenu() {
         boolean exitProgram = false;
 
@@ -57,6 +94,7 @@ public class Main {
             switch (selection) {
                 case 2:
                     carManagement();
+                    break;
                 case 0:
                     System.exit(0);
                     break;
@@ -88,6 +126,7 @@ public class Main {
             if (selection == 1 || selection == 0 || (systemHasCars && (selection == 2 || selection == 3))) {
                 switch (selection) {
                     case 1:
+                        addNewCar();
                         break;
                     case 2:
                         break;
@@ -98,9 +137,88 @@ public class Main {
                         break;
                 }
             } else {
-                errorMessage = "\"" + selection + ")\" isn't a valid option. Please try again.";
+                errorMessage = "\"" + selection + "\" isn't a valid option. Please try again.";
             }
         }
+    }
+
+    private static void addNewCar() {
+        Scanner scan = new Scanner(System.in);
+
+        String errorMessage = "";
+        char confirmation;
+        boolean completedForm = false;
+        boolean confirmed = false;
+
+        String licensePlate = "";
+        String brand = "";
+        String model = "";
+        FuelType fuelType;
+        double tankCapacity = 0;
+        double efficiency = 0;
+        CarCategory category;
+
+        while (!confirmed) {
+            cleanScreen();
+            System.out.println("<<<CAR-TRIP-PRICE>>>");
+            System.out.println("<<<Add car>>>");
+            System.out.println(errorMessage);
+
+            if (!completedForm) {
+                space();
+                System.out.print("1) License plate: ");
+                licensePlate = scan.nextLine();
+                System.out.println("");
+                System.out.print("2) Brand: ");
+                brand = scan.nextLine();
+                System.out.println("");
+                System.out.print("3) Model: ");
+                model = scan.nextLine();
+                System.out.println("");
+                System.out.println("4) Fuel type: ");
+                fuelType = fuelTypeSelector();
+                System.out.println("");
+                System.out.print("5) Tank capacity (L): ");
+                tankCapacity = scan.nextDouble();
+                System.out.println("");
+                System.out.print("6) Efficiency (Km/L): ");
+                efficiency = scan.nextDouble();
+                completedForm = true;
+            }
+
+            space();
+            System.out.println("Are these values correct?");
+            confirmation = confirmSubMenu();
+
+            switch (confirmation) {
+                case 'Y':
+                    Car newCar = new Car();
+                    newCar.setLicensePlate(licensePlate);
+                    newCar.setBrand(brand);
+                    newCar.setModel(model);
+                    newCar.setTankCapacity(tankCapacity);
+                    newCar.setEfficiency(efficiency);
+                    DataManagement.addCar(newCar);
+
+                    confirmed = true;
+
+                    System.out.print("Car successfully added. Press enter to continue.");
+                    System.out.println("");
+                    break;
+                case 'N':
+                    errorMessage = "";
+                    completedForm = false;
+                    scan.nextLine();
+                    break;
+                case 'M':
+                    confirmed = true;
+                    break;
+                default:
+                    errorMessage = "\"" + confirmation + "\" isn't a valid option. Please try again.";
+                    break;
+            }
+        }
+        mainMenu();
     }
 
     public static void main(String[] args) {
