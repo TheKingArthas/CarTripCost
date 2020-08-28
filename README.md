@@ -31,15 +31,15 @@ Also the _per-passenger_ `cost` will be possible to obtain dividing the `total c
 
 ## 2. Prerequisites
 ## 3. How to use
-## 4. Notes
 
-## 5. UML
+## 4. UML
 ![UML](/Documentation/img/CarTripCost_UML.png)
 - The prices and categories were based on the ones used at my own country (Uruguay). These might be different on other countries or locations.
 >### Sources
 > - Fuel types:  [Administración Nacional de Combustibles Alcohol y Pórtland (ANCAP)](https://www.ancap.com.uy/2093/1/precios-combustibles.html)
 > - Tolls costs and car categories: [Ministerio de trabajo y obras publicas (MTOP)](http://www.mtop.gub.uy/peajes)
 
+## 5. Notes
 ## 6. Run demo
 ### Add car
 ### List cars
