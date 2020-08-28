@@ -29,7 +29,9 @@ Each `toll` is going to charge a `car` only once, using the `car category` as a 
 Each `travel` will provide it `total cost`. This value will be made of the sum of all the `tolls` fares and the used `fuel`.
 Also the _per-passenger_ `cost` will be possible to obtain dividing the `total cost` in **equal parts** between the `passengers quantity`.
 
-## 2. Entity relationship diagram
+## 2. UML
+![UML](/Documentation/img/CarTripCost_UML.png)
+
 ## 3. Prerequisites
 ## 4. How to use
 ## 5. Notes
