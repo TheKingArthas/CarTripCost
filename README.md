@@ -33,7 +33,7 @@ Also the _per-passenger_ `cost` will be possible to obtain dividing the `total c
 ## 3. Prerequisites
 ## 4. How to use
 ## 5. Notes
-- The prices and categories were based from my the ones used at my own country (Uruguay). These might be different on other countries or locations.
+- The prices and categories were based on the ones used at my own country (Uruguay). These might be different on other countries or locations.
 >### Sources
 > - Fuel types:  [Administración Nacional de Combustibles Alcohol y Pórtland (ANCAP)](https://www.ancap.com.uy/2093/1/precios-combustibles.html)
 > - Tolls costs and car categories: [Ministerio de trabajo y obras publicas (MTOP)](http://www.mtop.gub.uy/peajes)
