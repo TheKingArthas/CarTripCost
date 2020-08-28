@@ -17,8 +17,8 @@ public class PriceManagement {
 
     public static double getCarCategoryPrice(CarCategory carCategory) {
         TempDB tempDB = TempDB.getInstance();
-        CarCategoryPrice mostUpToDateCarCategoryPrice = tempDB.historicalCarCateogriesPrices.get(0);
-        for (CarCategoryPrice ccp : tempDB.historicalCarCateogriesPrices) {
+        CarCategoryPrice mostUpToDateCarCategoryPrice = tempDB.historicalCarCategoriesPrices.get(0);
+        for (CarCategoryPrice ccp : tempDB.historicalCarCategoriesPrices) {
             if ((ccp.getCategory().equals(carCategory)) && (ccp.getUpdateDate().after(mostUpToDateCarCategoryPrice.getUpdateDate()))) {
                 mostUpToDateCarCategoryPrice = ccp;
             }
@@ -52,7 +52,7 @@ public class PriceManagement {
         carCategoryPrice.setCategory(carCategory);
         carCategoryPrice.setPrice(expectedPrice);
         carCategoryPrice.setUpdateDate(new Date());
-        tempDB.historicalCarCateogriesPrices.add(carCategoryPrice);
+        tempDB.historicalCarCategoriesPrices.add(carCategoryPrice);
     }
 
     public static double getTravelTollsTotalCost(Travel travel) {
@@ -62,7 +62,7 @@ public class PriceManagement {
         return perTollCost * tollsQuantity;
     }
 
-    static double getTravelTotalCost(Travel travel) {
+    public static double getTravelTotalCost(Travel travel) {
         double distanceToTravel = travel.getDistance();
         double fullTankPrice = getFullFuelTankPrice(travel.getCar());
         double carMaxDistance = travel.getCar().getCarMaxDistance();
@@ -71,7 +71,7 @@ public class PriceManagement {
         return ((distanceToTravel * fullTankPrice / carMaxDistance) + tollsTotalCost);
     }
 
-    static double getTravelPerPassengerPrice(Travel travel) {
+    public static double getTravelPerPassengerPrice(Travel travel) {
         double travelTotalCost = getTravelTotalCost(travel);
         int passengersQuantity = travel.getPassengersQuantity();
 

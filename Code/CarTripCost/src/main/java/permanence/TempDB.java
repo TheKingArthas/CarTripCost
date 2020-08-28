@@ -13,14 +13,14 @@ public class TempDB {
     public ArrayList<Car> cars;
     public ArrayList<Fuel> historicalFuelPrices;
     public ArrayList<Toll> tolls;
-    public ArrayList<CarCategoryPrice> historicalCarCateogriesPrices;
+    public ArrayList<CarCategoryPrice> historicalCarCategoriesPrices;
     public ArrayList<Travel> travels;
 
     private TempDB() {
         cars = new ArrayList<Car>();
         historicalFuelPrices = new ArrayList<Fuel>();
         tolls = new ArrayList<Toll>();
-        historicalCarCateogriesPrices = new ArrayList<CarCategoryPrice>();
+        historicalCarCategoriesPrices = new ArrayList<CarCategoryPrice>();
         travels = new ArrayList<Travel>();
     }
 

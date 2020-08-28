@@ -83,7 +83,7 @@ public class PriceManagementTest {
         tempDB.cars.clear();
         tempDB.historicalFuelPrices.clear();
         tempDB.tolls.clear();
-        tempDB.historicalCarCateogriesPrices.clear();
+        tempDB.historicalCarCategoriesPrices.clear();
         tempDB.travels.clear();
     }
 
