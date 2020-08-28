@@ -427,12 +427,12 @@
 										},
 										{
 											"_type": "UMLOperationView",
-											"_id": "AAAAAAF0NjLIQ/Vcbgw=",
+											"_id": "AAAAAAF0Nj5OctgpPwo=",
 											"_parent": {
 												"$ref": "AAAAAAF0NalfzZCNFgk="
 											},
 											"model": {
-												"$ref": "AAAAAAF0NeR4qZeCg5s="
+												"$ref": "AAAAAAF0Nj5OTdggAUI="
 											},
 											"font": "Arial;13;0",
 											"left": 245,
@@ -444,36 +444,28 @@
 										},
 										{
 											"_type": "UMLOperationView",
-											"_id": "AAAAAAF0NjLIRPVfHg8=",
+											"_id": "AAAAAAF0Nj7cK9yBKgo=",
 											"_parent": {
 												"$ref": "AAAAAAF0NalfzZCNFgk="
-											},
-											"model": {
-												"$ref": "AAAAAAF0NeR4qZeCg5s="
 											},
 											"font": "Arial;13;0",
 											"left": 245,
 											"top": 256,
 											"width": 198.326171875,
 											"height": 13,
-											"text": "+Car()",
 											"horizontalAlignment": 0
 										},
 										{
 											"_type": "UMLOperationView",
-											"_id": "AAAAAAF0NjLIGfU+Dc8=",
+											"_id": "AAAAAAF0Nj7cK9yE0N0=",
 											"_parent": {
 												"$ref": "AAAAAAF0NalfzZCNFgk="
-											},
-											"model": {
-												"$ref": "AAAAAAF0NeR4qZeCg5s="
 											},
 											"font": "Arial;13;0",
 											"left": 245,
 											"top": 271,
 											"width": 198.326171875,
 											"height": 13,
-											"text": "+Car()",
 											"horizontalAlignment": 0
 										}
 									],
@@ -5825,20 +5817,20 @@
 								},
 								{
 									"_type": "UMLOperation",
-									"_id": "AAAAAAF0NeR4qZeCg5s=",
-									"name": "Car"
-								},
-								{
-									"_type": "UMLOperation",
-									"_id": "AAAAAAF0NeR4qZeCg5s=",
-									"name": "Car"
-								},
-								{
-									"_type": "UMLOperation",
-									"_id": "AAAAAAF0NeR4qZeCg5s=",
+									"_id": "AAAAAAF0Nj5OTdggAUI=",
 									"_parent": {
 										"$ref": "AAAAAAF0NalfyZCEHuc="
 									},
+									"name": "Car"
+								},
+								{
+									"_type": "UMLOperation",
+									"_id": "AAAAAAF0NeR4qZeCg5s=",
+									"name": "Car"
+								},
+								{
+									"_type": "UMLOperation",
+									"_id": "AAAAAAF0NeR4qZeCg5s=",
 									"name": "Car"
 								}
 							]
@@ -6628,18 +6620,6 @@
 								"$ref": "AAAAAAF0Ni6s8RCdn1g="
 							},
 							"name": "PriceManagement",
-							"ownedElements": [
-								{
-									"_type": "UMLDependency",
-									"_id": "AAAAAAF0Ni9saMba5yA=",
-									"_parent": {
-										"$ref": "AAAAAAF0Ni9saMbZo0Q="
-									},
-									"source": {
-										"$ref": "AAAAAAF0Ni9saMbZo0Q="
-									}
-								}
-							],
 							"operations": [
 								{
 									"_type": "UMLOperation",
