@@ -29,12 +29,12 @@ Each `toll` is going to charge a `car` only once, using the `car category` as a 
 Each `travel` will provide it `total cost`. This value will be made of the sum of all the `tolls` fares and the used `fuel`.
 Also the _per-passenger_ `cost` will be possible to obtain dividing the `total cost` in **equal parts** between the `passengers quantity`.
 
-## 2. UML
-![UML](/Documentation/img/CarTripCost_UML.png)
+## 2. Prerequisites
+## 3. How to use
+## 4. Notes
 
-## 3. Prerequisites
-## 4. How to use
-## 5. Notes
+## 5. UML
+![UML](/Documentation/img/CarTripCost_UML.png)
 - The prices and categories were based on the ones used at my own country (Uruguay). These might be different on other countries or locations.
 >### Sources
 > - Fuel types:  [Administración Nacional de Combustibles Alcohol y Pórtland (ANCAP)](https://www.ancap.com.uy/2093/1/precios-combustibles.html)
