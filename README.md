@@ -22,10 +22,16 @@ The goal it's to achieve a software that calculates the _per-passenger_ cost of 
 > - There are no location or distance restrictions between the travel origin, destination, and asociated tolls
 
 ## 1. Reality summary
+The software is centered on **travels**. Each `travel` will have a `date`, an `origin`, a destination, one `car`, a number of passengers (including the driver) and can optionally have one or more **tolls**.
+
+Each `toll` is going to charge a `car` only once, using the `car category` as a reference to know the fare.
+
+Each `travel` will provide it `total cost`. This value will be made of the sum of all the `tolls` fares and the used `fuel`.
+Also the _per-passenger_ `cost` will be possible to obtain dividing the `total cost` in **equal parts** between the `passengers quantity`.
+
 ## 2. Entity relationship diagram
 ## 3. Prerequisites
 ## 4. How to use
-
 ## 5. Notes
 - The prices and categories were based from my the ones used at my own country (Uruguay). These might be different on other countries or locations.
 >### Sources
