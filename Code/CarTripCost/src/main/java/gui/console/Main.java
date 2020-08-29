@@ -8,7 +8,9 @@ package gui.console;
 import domain.Car;
 import domain.CarCategory;
 import domain.FuelType;
+import java.util.Date;
 import java.util.Scanner;
+import logic.PriceManagement;
 import permanence.DataManagement;
 import permanence.TempDB;
 
@@ -20,6 +22,7 @@ public class Main {
 
     private static TempDB tempDB;
 
+    //////General menu and screen options//////
     private static void cleanScreen() {
         for (int i = 0; i < 50; i++) {
             System.out.println("");
@@ -53,6 +56,45 @@ public class Main {
         return confirmation;
     }
 
+    private static void mainMenu() {
+        boolean exitProgram = false;
+        String errorMessage = "";
+
+        while (!exitProgram) {
+            cleanScreen();
+            System.out.println("<<<CAR-TRIP-PRICE>>>");
+            System.out.println("<<<Main menu>>>");
+            System.out.println(errorMessage);
+            space();
+            System.out.println("1) New travel");
+            System.out.println("2) Car management");
+            System.out.println("3) Fuel management");
+            System.out.println("4) Toll management");
+            space();
+            System.out.println("0) Exit");
+
+            space();
+            int selection = selectOption();
+
+            if (0 <= selection || selection <= 4) {
+                switch (selection) {
+                    case 2:
+                        carManagement();
+                        break;
+                    case 3:
+                        fuelManagement();
+                        break;
+                    case 0:
+                        System.exit(0);
+                        break;
+                }
+            } else {
+                errorMessage = "\"" + selection + "\" isn't a valid option. Please try again.";
+            }
+        }
+    }
+
+    //////Fuel management//////
     private static FuelType fuelTypeSelector() {
         Scanner scan = new Scanner(System.in);
         int selection = 0;
@@ -74,6 +116,106 @@ public class Main {
         return selectedFuelType;
     }
 
+    private static void fuelManagement() {
+        boolean systemHasFuels = !tempDB.historicalFuelPrices.isEmpty();
+        String errorMessage = "";
+
+        while (true) {
+            cleanScreen();
+            System.out.println("<<<CAR-TRIP-PRICE>>>");
+            System.out.println("<<<Fuel management>>>");
+            System.out.println(errorMessage);
+            space();
+            System.out.println("1) Update fuel price");
+            if (systemHasFuels) {
+                System.out.println("2) List fuel prices");
+            }
+            space();
+            System.out.println("0) Go back");
+
+            space();
+            int selection = selectOption();
+
+            if (selection == 1 || selection == 0 || (systemHasFuels && (selection == 2))) {
+                switch (selection) {
+                    case 1:
+                        updateFuelPrice();
+                        break;
+                    case 2:
+                        listFuelPrices();
+                        break;
+                    case 0:
+                        mainMenu();
+                        break;
+                }
+            } else {
+                errorMessage = "\"" + selection + "\" isn't a valid option. Please try again.";
+            }
+        }
+    }
+
+    private static void updateFuelPrice() {
+        Scanner scan = new Scanner(System.in);
+
+        String errorMessage = "";
+        char confirmation;
+        boolean completedForm = false;
+        boolean confirmed = false;
+
+        FuelType fuelType = FuelType.GASOLINE;
+        double price = 0;
+        Date date = new Date();
+
+        while (!confirmed) {
+            cleanScreen();
+            System.out.println("<<<CAR-TRIP-PRICE>>>");
+            System.out.println("<<<Update fuel type>>>");
+            System.out.println(errorMessage);
+
+            if (!completedForm) {
+                space();
+                System.out.println("1) Fuel type: ");
+                fuelType = fuelTypeSelector();
+                System.out.println("");
+                System.out.print("2) New price: ");
+                price = scan.nextDouble();
+
+                completedForm = true;
+            }
+            cleanScreen();
+            System.out.println("1) Fuel type: " + fuelType);
+            System.out.println("2) New price: $ " + price);
+            space();
+            System.out.println("Are these values correct?");
+            confirmation = confirmSubMenu();
+
+            switch (confirmation) {
+                case 'Y':
+                    PriceManagement.updateFuelTypePrice(fuelType, price);
+
+                    confirmed = true;
+
+                    System.out.print("Fuel price successfully updated. Press enter to continue.");
+                    scan.nextLine();
+                    scan.nextLine();
+                    break;
+                case 'N':
+                    errorMessage = "";
+                    completedForm = false;
+                    scan.nextLine();
+                    break;
+                case 'M':
+                    confirmed = true;
+                    break;
+                default:
+                    errorMessage = "\"" + confirmation + "\" isn't a valid option. Please try again.";
+                    break;
+            }
+        }
+        mainMenu();
+    }
+
+    //////Car management//////
     private static CarCategory carCategorySelector() {
         Scanner scan = new Scanner(System.in);
         int selection = 0;
@@ -110,41 +252,6 @@ public class Main {
         return selectedCarCategory;
     }
 
-    private static void mainMenu() {
-        boolean exitProgram = false;
-        String errorMessage = "";
-
-        while (!exitProgram) {
-            cleanScreen();
-            System.out.println("<<<CAR-TRIP-PRICE>>>");
-            System.out.println("<<<Main menu>>>");
-            System.out.println(errorMessage);
-            space();
-            System.out.println("1) New travel");
-            System.out.println("2) Car management");
-            System.out.println("3) Fuel management");
-            System.out.println("4) Toll management");
-            space();
-            System.out.println("0) Exit");
-
-            space();
-            int selection = selectOption();
-
-            if (0 <= selection || selection <= 4) {
-                switch (selection) {
-                    case 2:
-                        carManagement();
-                        break;
-                    case 0:
-                        System.exit(0);
-                        break;
-                }
-            } else {
-                errorMessage = "\"" + selection + "\" isn't a valid option. Please try again.";
-            }
-        }
-    }
-
     private static void carManagement() {
         boolean systemHasCars = !tempDB.cars.isEmpty();
         String errorMessage = "";
@@ -172,8 +279,6 @@ public class Main {
                         break;
                     case 2:
                         listCars();
-                        break;
-                    case 3:
                         break;
                     case 0:
                         mainMenu();
