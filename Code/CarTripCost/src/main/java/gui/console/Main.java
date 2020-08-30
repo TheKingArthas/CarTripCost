@@ -27,6 +27,13 @@ public class Main {
 
     private static TempDB tempDB;
 
+    public static void main(String[] args) {
+        cleanScreen();
+        tempDB = TempDB.getInstance();
+        Setup.start();
+        mainMenu();
+    }
+
     //////General menu and screen options//////
     private static void cleanScreen() {
         for (int i = 0; i < 50; i++) {
@@ -421,12 +428,6 @@ public class Main {
         space();
         System.out.print("Press enter to continue.");
         scan.nextLine();
-    }
-
-    public static void main(String[] args) {
-        cleanScreen();
-        tempDB = TempDB.getInstance();
-        mainMenu();
     }
 
     //////Toll management//////
