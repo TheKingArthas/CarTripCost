@@ -9,6 +9,8 @@ import domain.Car;
 import domain.CarCategory;
 import domain.Fuel;
 import domain.FuelType;
+import domain.Toll;
+import java.awt.Point;
 import java.util.Date;
 import java.util.Scanner;
 import logic.PriceManagement;
@@ -84,6 +86,9 @@ public class Main {
                         break;
                     case 3:
                         fuelManagement();
+                        break;
+                    case 4:
+                        tollManagement();
                         break;
                     case 0:
                         System.exit(0);
@@ -231,7 +236,7 @@ public class Main {
         scan.nextLine();
     }
 
-//////Car management//////
+    //////Car management//////
     private static CarCategory carCategorySelector() {
         Scanner scan = new Scanner(System.in);
         int selection = 0;
@@ -417,6 +422,119 @@ public class Main {
         cleanScreen();
         tempDB = TempDB.getInstance();
         mainMenu();
+    }
+
+    //////Toll management//////
+    private static void tollManagement() {
+        boolean systemHasTolls = !tempDB.tolls.isEmpty();
+        String errorMessage = "";
+
+        while (true) {
+            cleanScreen();
+            System.out.println("<<<CAR-TRIP-PRICE>>>");
+            System.out.println("<<<Toll management>>>");
+            System.out.println(errorMessage);
+            space();
+            System.out.println("1) Add toll");
+            if (systemHasTolls) {
+                System.out.println("2) List categories prices");
+            }
+            space();
+            System.out.println("0) Go back");
+
+            space();
+            int selection = selectOption();
+
+            if (selection == 1 || selection == 0 || (systemHasTolls && (selection == 2))) {
+                switch (selection) {
+                    case 1:
+                        addToll();
+                        break;
+                    case 2:
+                        listTolls();
+                        break;
+                    case 0:
+                        mainMenu();
+                        break;
+                }
+            } else {
+                errorMessage = "\"" + selection + "\" isn't a valid option. Please try again.";
+            }
+        }
+    }
+
+    private static void addToll() {
+        Scanner scan = new Scanner(System.in);
+
+        String errorMessage = "";
+        char confirmation;
+        boolean completedForm = false;
+        boolean confirmed = false;
+
+        String name = "";
+        int x = 0;
+        int y = 0;
+        Point coordinates = new Point();
+
+        while (!confirmed) {
+            cleanScreen();
+            System.out.println("<<<CAR-TRIP-PRICE>>>");
+            System.out.println("<<<Add toll>>>");
+            System.out.println(errorMessage);
+
+            if (!completedForm) {
+                space();
+                System.out.print("1) Toll name: ");
+                name = scan.nextLine();
+                System.out.println("");
+                System.out.println("2) Toll coordinates: ");
+                System.out.print("x: ");
+                x = scan.nextInt();
+                System.out.print("y: ");
+                y = scan.nextInt();
+                coordinates = new Point(x, y);
+
+                completedForm = true;
+            }
+            cleanScreen();
+            System.out.println("1) Toll name: " + name);
+            System.out.println("2) Coordinates: x: " + x + "| y: " + y);
+            space();
+            System.out.println("Are these values correct?");
+            confirmation = confirmSubMenu();
+
+            switch (confirmation) {
+                case 'Y':
+                    Toll newToll = new Toll();
+                    newToll.setName(name);
+                    newToll.setCoordinates(coordinates);
+
+                    DataManagement.addToll(newToll);
+
+                    confirmed = true;
+
+                    System.out.print("Toll successfully added. Press enter to continue.");
+                    scan.nextLine();
+                    scan.nextLine();
+                    break;
+                case 'N':
+                    errorMessage = "";
+                    completedForm = false;
+                    scan.nextLine();
+                    break;
+                case 'M':
+                    confirmed = true;
+                    break;
+                default:
+                    errorMessage = "\"" + confirmation + "\" isn't a valid option. Please try again.";
+                    break;
+            }
+        }
+        mainMenu();
+    }
+
+    private static void listTolls() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
