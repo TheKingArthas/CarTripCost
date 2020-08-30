@@ -10,9 +10,11 @@ import domain.CarCategory;
 import domain.Fuel;
 import domain.FuelType;
 import domain.Toll;
+import domain.Travel;
 import java.awt.Point;
 import java.util.Date;
 import java.util.Scanner;
+import javafx.scene.chart.PieChart;
 import logic.PriceManagement;
 import permanence.DataManagement;
 import permanence.TempDB;
@@ -631,5 +633,117 @@ public class Main {
         System.out.print(
                 "Press enter to continue.");
         scan.nextLine();
+    }
+
+    //////Travel management//////
+    private static void addTravel() {
+        Scanner scan = new Scanner(System.in);
+
+        String errorMessage = "";
+        char confirmation;
+        boolean completedForm = false;
+        boolean confirmed = false;
+
+        Car car = null;
+        int originX = 0;
+        int originY = 0;
+        int destinyX = 0;
+        int destinyY = 0;
+        int passengersQuantity = 0;
+
+        while (!confirmed) {
+            cleanScreen();
+            System.out.println("<<<CAR-TRIP-PRICE>>>");
+            System.out.println("<<<Add travel>>>");
+            System.out.println(errorMessage);
+
+            if (DataManagement.hasCars()) {
+
+                if (!completedForm) {
+                    space();
+                    System.out.print("1) Car license plate: ");
+                    car = DataManagement.getCarByLicensePlate(scan.nextLine());
+                    System.out.println("");
+                    System.out.println("2) Origin: ");
+                    System.out.print("x: ");
+                    originX = scan.nextInt();
+                    System.out.println(" y: ");
+                    originY = scan.nextInt();
+                    System.out.print("3) Destiny: ");
+                    System.out.print("x: ");
+                    destinyX = scan.nextInt();
+                    System.out.println(" y: ");
+                    destinyY = scan.nextInt();
+                    System.out.println("");
+                    System.out.print("4) Passengers quantity: ");
+                    passengersQuantity = scan.nextInt();
+
+                    completedForm = true;
+                }
+                cleanScreen();
+                System.out.println("1) Car: " + car.getLicensePlate());
+                System.out.println("2) Origin: x: " + originX + " | y: " + originY);
+                System.out.println("3) Destiny: x: " + destinyX + " | y: " + destinyY);
+                System.out.println("4) Passengers quantity: " + passengersQuantity);
+                space();
+                System.out.println("Are these values correct?");
+                confirmation = confirmSubMenu();
+
+                switch (confirmation) {
+                    case 'Y':
+                        Travel newTravel = new Travel();
+                        newTravel.setCar(car);
+                        newTravel.setDate(new Date());
+                        newTravel.setOrigin(new Point(originX, originY));
+                        newTravel.setDestiny(new Point(destinyX, destinyY));
+                        newTravel.setPassengersQuantity(passengersQuantity);
+
+                        DataManagement.addTravel(newTravel);
+
+                        confirmed = true;
+
+                        cleanScreen();
+
+                        System.out.print("Travel successfully added.");
+                        System.out.println("");
+                        System.out.println("These are the travel data: ");
+                        System.out.println("");
+                        System.out.println("Car: " + car.getLicensePlate());
+                        System.out.println("Average car efficency: " + car.getEfficiency() + " Km/L");
+                        System.out.println("Tank capacity: " + car.getTankCapacity() + " L");
+                        System.out.println("Per litre fuel price: " + PriceManagement.getFuelPrice(car.getFuelType()));
+                        System.out.println("");
+                        System.out.println("Full tank price: $" + PriceManagement.getFullFuelTankPrice(car));
+                        System.out.println("Maximum distance: " + car.getCarMaxDistance() + " Km");
+                        System.out.println("");
+                        System.out.println("Travel distance: " + newTravel.getDistance() + " Km");
+                        System.out.println("");
+                        System.out.println("Amount of tolls: " + newTravel.getTolls().size());
+                        System.out.println("Total tolls price: $" + PriceManagement.getTravelTollsTotalCost(newTravel));
+                        System.out.println("");
+                        System.out.println("Total travel price: $" + PriceManagement.getTravelTotalCost(newTravel));
+                        System.out.println("Per passenger cost: $" + PriceManagement.getTravelPerPassengerPrice(newTravel));
+
+                        System.out.print("Press enter to continue.");
+                        scan.nextLine();
+                        scan.nextLine();
+                        break;
+                    case 'N':
+                        errorMessage = "";
+                        completedForm = false;
+                        scan.nextLine();
+                        break;
+                    case 'M':
+                        confirmed = true;
+                        break;
+                    default:
+                        errorMessage = "\"" + confirmation + "\" isn't a valid option. Please try again.";
+                        break;
+                }
+            } else {
+                errorMessage = "There must be cars entered into the system to add a travel";
+            }
+        }
+        mainMenu();
     }
 }
