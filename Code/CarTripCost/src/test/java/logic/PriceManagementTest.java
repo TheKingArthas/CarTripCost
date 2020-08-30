@@ -173,4 +173,19 @@ public class PriceManagementTest {
 
         assertEquals(expectedPrice, obtainedPrice, 0.009);
     }
+
+    @Test
+    public void testUpdateFuelTypePrice() throws InterruptedException {
+        Thread.sleep(2000);
+        /*This waiting time was added to avoid old and new date to overlap*/
+        
+        FuelType fuelType = FuelType.GASOLINE;
+        double expectedPrice = 50.00;
+
+        PriceManagement.updateFuelTypePrice(fuelType, expectedPrice);
+
+        double obtainedPrice = PriceManagement.getFuelPrice(fuelType);
+
+        assertEquals(expectedPrice, obtainedPrice, 0.009);
+    }
 }

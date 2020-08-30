@@ -7,6 +7,7 @@ import domain.Fuel;
 import domain.FuelType;
 import domain.Travel;
 import java.util.Date;
+import permanence.DataManagement;
 import permanence.TempDB;
 
 /**
@@ -76,5 +77,14 @@ public class PriceManagement {
         int passengersQuantity = travel.getPassengersQuantity();
 
         return travelTotalCost / passengersQuantity;
+    }
+
+    static void updateFuelTypePrice(FuelType fuelType, double price) {
+        Fuel newFuel = new Fuel();
+        newFuel.setType(fuelType);
+        newFuel.setPrice(price);
+        newFuel.setPriceUpdateDate(new Date());
+        
+        DataManagement.addFuel(newFuel);
     }
 }
