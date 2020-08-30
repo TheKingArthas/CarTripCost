@@ -152,7 +152,7 @@ public class PriceManagementTest {
     public void testGetTravelTotalPrice() {
         double distanceToTravel = newTravel.getDistance();
         double fullTankPrice = PriceManagement.getFullFuelTankPrice(newCar);
-        double carMaxDistance = newCar.getCarMaxDistance();
+        double carMaxDistance = newCar.getMaxDistance();
         double tollsTotalCost = PriceManagement.getTravelTollsTotalCost(newTravel);
 
         double expectedPrice = (distanceToTravel * fullTankPrice / carMaxDistance) + tollsTotalCost;

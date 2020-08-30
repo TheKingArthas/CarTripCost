@@ -78,7 +78,7 @@ public class PriceManagement {
     public static double getTravelTotalCost(Travel travel) {
         double distanceToTravel = travel.getDistance();
         double fullTankPrice = getFullFuelTankPrice(travel.getCar());
-        double carMaxDistance = travel.getCar().getCarMaxDistance();
+        double carMaxDistance = travel.getCar().getMaxDistance();
         double tollsTotalCost = getTravelTollsTotalCost(travel);
 
         return ((distanceToTravel * fullTankPrice / carMaxDistance) + tollsTotalCost);

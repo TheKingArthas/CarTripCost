@@ -83,7 +83,7 @@ public class DataManagementTest {
     @Test
     public void testGetCarMaxDistance() {
         double expectedDistance = fuelTankCapacity * carEfficiency;
-        double obtainedDistance = newCar.getCarMaxDistance();
+        double obtainedDistance = newCar.getMaxDistance();
 
         assertEquals(expectedDistance, obtainedDistance, 0.009);
     }

@@ -70,7 +70,7 @@ public class Car {
         this.category = category;
     }
 
-    public double getCarMaxDistance() {
+    public double getMaxDistance() {
         double tankCapacity = this.getTankCapacity();
         double carEfficiency = this.getEfficiency();
 

@@ -727,7 +727,7 @@ public class Main {
                         System.out.println("Per litre fuel price: " + PriceManagement.getFuelPrice(car.getFuelType()));
                         System.out.println("");
                         System.out.println("Full tank price: $" + PriceManagement.getFullFuelTankPrice(car));
-                        System.out.println("Maximum distance: " + car.getCarMaxDistance() + " Km");
+                        System.out.println("Maximum distance: " + car.getMaxDistance() + " Km");
                         System.out.println("");
                         System.out.println("Travel distance: " + newTravel.getDistance() + " Km");
                         System.out.println("");
