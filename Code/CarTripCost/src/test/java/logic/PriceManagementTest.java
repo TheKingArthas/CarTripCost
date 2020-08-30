@@ -9,7 +9,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import permanence.DataManagement;
-import permanence.TempDB;
 
 /**
  *
@@ -77,14 +76,8 @@ public class PriceManagementTest {
     }
 
     @After
-    public void dataBaseCleanUp() {
-        TempDB tempDB = TempDB.getInstance();
-
-        tempDB.cars.clear();
-        tempDB.historicalFuelPrices.clear();
-        tempDB.tolls.clear();
-        tempDB.historicalCarCategoriesPrices.clear();
-        tempDB.travels.clear();
+    public void deleteAllDataBases() {
+        DataManagement.deleteAllDataBases();
     }
 
     @Test
@@ -178,7 +171,7 @@ public class PriceManagementTest {
     public void testUpdateFuelTypePrice() throws InterruptedException {
         Thread.sleep(2000);
         /*This waiting time was added to avoid old and new date to overlap*/
-        
+
         FuelType fuelType = FuelType.GASOLINE;
         double expectedPrice = 50.00;
 

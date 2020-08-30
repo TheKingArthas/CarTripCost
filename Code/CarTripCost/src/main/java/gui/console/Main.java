@@ -7,17 +7,15 @@ package gui.console;
 
 import domain.Car;
 import domain.CarCategory;
-import domain.Fuel;
 import domain.FuelType;
 import domain.Toll;
 import domain.Travel;
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
-import javafx.scene.chart.PieChart;
 import logic.PriceManagement;
 import permanence.DataManagement;
-import permanence.TempDB;
 
 /**
  *
@@ -25,11 +23,8 @@ import permanence.TempDB;
  */
 public class Main {
 
-    private static TempDB tempDB;
-
     public static void main(String[] args) {
         cleanScreen();
-        tempDB = TempDB.getInstance();
         Setup.start();
         mainMenu();
     }
@@ -135,7 +130,7 @@ public class Main {
     }
 
     private static void fuelManagement() {
-        boolean systemHasFuels = !tempDB.historicalFuelPrices.isEmpty();
+        boolean systemHasFuels = DataManagement.hasFuels();
         String errorMessage = "";
 
         while (true) {
@@ -286,7 +281,7 @@ public class Main {
     }
 
     private static void carManagement() {
-        boolean systemHasCars = !tempDB.cars.isEmpty();
+        boolean systemHasCars = DataManagement.hasCars();
         String errorMessage = "";
 
         while (true) {
@@ -422,7 +417,7 @@ public class Main {
         cleanScreen();
 
         System.out.println("LICENSE PLATE | BRAND | MODEL |");
-        for (Car c : tempDB.cars) {
+        for (Car c : DataManagement.getCars()) {
             System.out.println("| " + c.getLicensePlate() + " | " + c.getBrand() + " | " + c.getModel() + " |");
         }
         space();
@@ -432,7 +427,7 @@ public class Main {
 
     //////Toll management//////
     private static void tollManagement() {
-        boolean systemHasTolls = !tempDB.tolls.isEmpty();
+        boolean systemHasTolls = DataManagement.hasTolls();
         String errorMessage = "";
 
         while (true) {
@@ -552,7 +547,7 @@ public class Main {
         int id = 1;
 
         System.out.println("ID | NAME | COORDINATES |");
-        for (Toll t : tempDB.tolls) {
+        for (Toll t : DataManagement.getTolls()) {
             System.out.println(id + " | " + t.getName() + " | x: " + t.getCoordinates().x + " | y: " + t.getCoordinates().y);
             id++;
         }
@@ -764,7 +759,7 @@ public class Main {
     private static void addTollToTravel(Travel travel) {
         Scanner scan = new Scanner(System.in);
         int selection = Integer.MAX_VALUE;
-        TempDB tempDB = Main.tempDB.getInstance();
+        ArrayList<Toll> tolls = DataManagement.getTolls();
 
         while (selection != 0) {
             listTolls();
@@ -773,7 +768,7 @@ public class Main {
             selection = scan.nextInt();
 
             if (selection != 0) {
-                travel.addToll(tempDB.tolls.get(selection + 1));
+                DataManagement.addTollToTravel(travel, tolls.get(selection + 1));
             }
         }
     }

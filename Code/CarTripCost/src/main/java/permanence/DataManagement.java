@@ -2,6 +2,8 @@ package permanence;
 
 import domain.*;
 import java.awt.Point;
+import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -19,10 +21,20 @@ public class DataManagement {
         return !tempDB.cars.isEmpty();
     }
 
+    public static boolean hasFuels() {
+        TempDB tempDB = TempDB.getInstance();
+        return !tempDB.historicalFuelPrices.isEmpty();
+    }
+
     public static void addCar(Car car) {
         TempDB tempDB = TempDB.getInstance();
 
         tempDB.cars.add(car);
+    }
+
+    public static ArrayList<Car> getCars() {
+        TempDB tempDB = TempDB.getInstance();
+        return tempDB.cars;
     }
 
     public static Car getCarByLicensePlate(String licensePlate) {
@@ -47,6 +59,12 @@ public class DataManagement {
         TempDB tempDB = TempDB.getInstance();
 
         tempDB.tolls.add(toll);
+    }
+
+    public static ArrayList<Toll> getTolls() {
+        TempDB tempDB = TempDB.getInstance();
+
+        return tempDB.tolls;
     }
 
     public static Toll getTollByCoordinates(Point coordinates) {
@@ -79,5 +97,45 @@ public class DataManagement {
         TempDB tempDB = TempDB.getInstance();
 
         tempDB.travels.add(travel);
+    }
+
+    public static ArrayList<CarCategoryPrice> historicalCarCategoriesPrices() {
+        TempDB tempDB = TempDB.getInstance();
+
+        return tempDB.historicalCarCategoriesPrices;
+    }
+
+    public static ArrayList<Fuel> getHistoricalFuelPrices() {
+        TempDB tempDB = TempDB.getInstance();
+
+        return tempDB.historicalFuelPrices;
+    }
+
+    public static void updateCarCategoryPrice(CarCategory carCategory, double expectedPrice) {
+        TempDB tempDB = TempDB.getInstance();
+
+        CarCategoryPrice carCategoryPrice = new CarCategoryPrice();
+        carCategoryPrice.setCategory(carCategory);
+        carCategoryPrice.setPrice(expectedPrice);
+        carCategoryPrice.setUpdateDate(new Date());
+
+        tempDB.historicalCarCategoriesPrices.add(carCategoryPrice);
+    }
+
+    public static void addTollToTravel(Travel travel, Toll toll) {
+        TempDB tempDB = TempDB.getInstance();
+
+        for (Travel tr : tempDB.travels) {
+            if (tr.equals(travel)) {
+                tr.addToll(toll);
+            }
+        }
+    }
+
+    /**
+     * WARNING!: This method will wipe all data. This procedure cannot be undone.
+     */
+    public static void deleteAllDataBases() {
+        TempDB.deleteAllDataBases();
     }
 }

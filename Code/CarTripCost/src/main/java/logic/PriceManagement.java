@@ -6,9 +6,9 @@ import domain.CarCategoryPrice;
 import domain.Fuel;
 import domain.FuelType;
 import domain.Travel;
+import java.util.ArrayList;
 import java.util.Date;
 import permanence.DataManagement;
-import permanence.TempDB;
 
 /**
  *
@@ -17,9 +17,10 @@ import permanence.TempDB;
 public class PriceManagement {
 
     public static double getCarCategoryPrice(CarCategory carCategory) {
-        TempDB tempDB = TempDB.getInstance();
-        CarCategoryPrice mostUpToDateCarCategoryPrice = tempDB.historicalCarCategoriesPrices.get(0);
-        for (CarCategoryPrice ccp : tempDB.historicalCarCategoriesPrices) {
+        ArrayList<CarCategoryPrice> historicalCarCategoriesPrices = DataManagement.historicalCarCategoriesPrices();
+
+        CarCategoryPrice mostUpToDateCarCategoryPrice = historicalCarCategoriesPrices.get(0);
+        for (CarCategoryPrice ccp : DataManagement.historicalCarCategoriesPrices()) {
             if ((ccp.getCategory().equals(carCategory)) && (ccp.getUpdateDate().after(mostUpToDateCarCategoryPrice.getUpdateDate()))) {
                 mostUpToDateCarCategoryPrice = ccp;
             }
@@ -35,10 +36,11 @@ public class PriceManagement {
     }
 
     public static double getFuelPrice(FuelType fuelType) {
-        TempDB tempDB = TempDB.getInstance();
-        Fuel mostUpToDateFuel = tempDB.historicalFuelPrices.get(0);
+        ArrayList<Fuel> historicalFuelPrices = DataManagement.getHistoricalFuelPrices();
+
+        Fuel mostUpToDateFuel = historicalFuelPrices.get(0);
         double mostUpToDatePrice = mostUpToDateFuel.getPrice();
-        for (Fuel f : tempDB.historicalFuelPrices) {
+        for (Fuel f : historicalFuelPrices) {
             if ((f.getType().equals(fuelType)) && (f.getPriceUpdateDate().after(mostUpToDateFuel.getPriceUpdateDate()))) {
                 mostUpToDateFuel = f;
             }
@@ -48,12 +50,7 @@ public class PriceManagement {
     }
 
     public static void updateCarCategoryPrice(CarCategory carCategory, double expectedPrice) {
-        TempDB tempDB = TempDB.getInstance();
-        CarCategoryPrice carCategoryPrice = new CarCategoryPrice();
-        carCategoryPrice.setCategory(carCategory);
-        carCategoryPrice.setPrice(expectedPrice);
-        carCategoryPrice.setUpdateDate(new Date());
-        tempDB.historicalCarCategoriesPrices.add(carCategoryPrice);
+       DataManagement.updateCarCategoryPrice(carCategory, expectedPrice);
     }
 
     public static double getTravelTollsTotalCost(Travel travel) {

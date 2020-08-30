@@ -24,10 +24,24 @@ public class TempDB {
         travels = new ArrayList<Travel>();
     }
 
-    public static TempDB getInstance() {
+    protected static TempDB getInstance() {
         if (tempDB == null) {
             tempDB = new TempDB();
         }
         return tempDB;
+    }
+
+    /**
+     * WARNING!: This method will wipe all data. This procedure cannot be
+     * undone.
+     */
+    protected static void deleteAllDataBases() {
+        TempDB tempDB = TempDB.getInstance();
+
+        tempDB.cars.clear();
+        tempDB.historicalFuelPrices.clear();
+        tempDB.tolls.clear();
+        tempDB.historicalCarCategoriesPrices.clear();
+        tempDB.travels.clear();
     }
 }
