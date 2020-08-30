@@ -437,7 +437,8 @@ public class Main {
             space();
             System.out.println("1) Add toll");
             if (systemHasTolls) {
-                System.out.println("2) List categories prices");
+                System.out.println("2) List tolls");
+                System.out.println("3) Update categorie price");
             }
             space();
             System.out.println("0) Go back");
@@ -445,7 +446,7 @@ public class Main {
             space();
             int selection = selectOption();
 
-            if (selection == 1 || selection == 0 || (systemHasTolls && (selection == 2))) {
+            if (selection == 1 || selection == 0 || (systemHasTolls && ((selection == 2) || selection == 3))) {
                 switch (selection) {
                     case 1:
                         addToll();
@@ -534,7 +535,16 @@ public class Main {
     }
 
     private static void listTolls() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Scanner scan = new Scanner(System.in);
+        cleanScreen();
+
+        System.out.println("NAME | COORDINATES |");
+        for (Toll t : tempDB.tolls) {
+            System.out.println("| " + t.getName() + " | x: " + t.getCoordinates().x + " | y: " + t.getCoordinates().y);
+        }
+        space();
+        System.out.print("Press enter to continue.");
+        scan.nextLine();
     }
 
 }
