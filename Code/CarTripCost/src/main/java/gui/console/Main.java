@@ -7,6 +7,7 @@ package gui.console;
 
 import domain.Car;
 import domain.CarCategory;
+import domain.Fuel;
 import domain.FuelType;
 import java.util.Date;
 import java.util.Scanner;
@@ -215,7 +216,22 @@ public class Main {
         mainMenu();
     }
 
-    //////Car management//////
+    private static void listFuelPrices() {
+        Scanner scan = new Scanner(System.in);
+        cleanScreen();
+
+        System.out.println("FUEL | COST |");
+        System.out.println(FuelType.GASOLINE + " | " + PriceManagement.getFuelPrice(FuelType.GASOLINE));
+        System.out.println(FuelType.PREMIUM + " | " + PriceManagement.getFuelPrice(FuelType.PREMIUM));
+        System.out.println(FuelType.SUPER + " | " + PriceManagement.getFuelPrice(FuelType.SUPER));
+        space();
+
+        System.out.print(
+                "Press enter to continue.");
+        scan.nextLine();
+    }
+
+//////Car management//////
     private static CarCategory carCategorySelector() {
         Scanner scan = new Scanner(System.in);
         int selection = 0;
@@ -402,4 +418,5 @@ public class Main {
         tempDB = TempDB.getInstance();
         mainMenu();
     }
+
 }

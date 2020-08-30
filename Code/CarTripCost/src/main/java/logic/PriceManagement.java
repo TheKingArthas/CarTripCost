@@ -77,4 +77,8 @@ public class PriceManagement {
 
         return travelTotalCost / passengersQuantity;
     }
+
+    public static void updateFuelTypePrice(FuelType fuelType, double price) {
+        throw new UnsupportedOperationException("Not supported yet.");//It will be added at "develop" branch.
+    }
 }
