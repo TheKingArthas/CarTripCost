@@ -17,10 +17,10 @@ import permanence.DataManagement;
 public class PriceManagement {
 
     public static double getCarCategoryPrice(CarCategory carCategory) {
-        ArrayList<CarCategoryPrice> historicalCarCategoriesPrices = DataManagement.historicalCarCategoriesPrices();
+        ArrayList<CarCategoryPrice> historicalCarCategoriesPrices = DataManagement.getHistoricalCarCategoriesPrices();
 
         CarCategoryPrice mostUpToDateCarCategoryPrice = historicalCarCategoriesPrices.get(0);
-        for (CarCategoryPrice ccp : DataManagement.historicalCarCategoriesPrices()) {
+        for (CarCategoryPrice ccp : DataManagement.getHistoricalCarCategoriesPrices()) {
             if ((ccp.getCategory().equals(carCategory)) && (ccp.getUpdateDate().after(mostUpToDateCarCategoryPrice.getUpdateDate()))) {
                 mostUpToDateCarCategoryPrice = ccp;
             }

@@ -11,19 +11,9 @@ import java.util.Date;
  */
 public class DataManagement {
 
-    public static boolean hasTolls() {
-        TempDB tempDB = TempDB.getInstance();
-        return !tempDB.tolls.isEmpty();
-    }
-
     public static boolean hasCars() {
         TempDB tempDB = TempDB.getInstance();
         return !tempDB.cars.isEmpty();
-    }
-
-    public static boolean hasFuels() {
-        TempDB tempDB = TempDB.getInstance();
-        return !tempDB.historicalFuelPrices.isEmpty();
     }
 
     public static void addCar(Car car) {
@@ -50,9 +40,9 @@ public class DataManagement {
         return requestedCar;
     }
 
-    public static void addFuel(Fuel newFuel) {
+    public static boolean hasTolls() {
         TempDB tempDB = TempDB.getInstance();
-        tempDB.historicalFuelPrices.add(newFuel);
+        return !tempDB.tolls.isEmpty();
     }
 
     public static void addToll(Toll toll) {
@@ -93,22 +83,10 @@ public class DataManagement {
         return requestedCoordinates;
     }
 
-    public static void addTravel(Travel travel) {
-        TempDB tempDB = TempDB.getInstance();
-
-        tempDB.travels.add(travel);
-    }
-
-    public static ArrayList<CarCategoryPrice> historicalCarCategoriesPrices() {
+    public static ArrayList<CarCategoryPrice> getHistoricalCarCategoriesPrices() {
         TempDB tempDB = TempDB.getInstance();
 
         return tempDB.historicalCarCategoriesPrices;
-    }
-
-    public static ArrayList<Fuel> getHistoricalFuelPrices() {
-        TempDB tempDB = TempDB.getInstance();
-
-        return tempDB.historicalFuelPrices;
     }
 
     public static void updateCarCategoryPrice(CarCategory carCategory, double expectedPrice) {
@@ -122,6 +100,28 @@ public class DataManagement {
         tempDB.historicalCarCategoriesPrices.add(carCategoryPrice);
     }
 
+    public static boolean hasFuels() {
+        TempDB tempDB = TempDB.getInstance();
+        return !tempDB.historicalFuelPrices.isEmpty();
+    }
+
+    public static void addFuel(Fuel newFuel) {
+        TempDB tempDB = TempDB.getInstance();
+        tempDB.historicalFuelPrices.add(newFuel);
+    }
+
+    public static ArrayList<Fuel> getHistoricalFuelPrices() {
+        TempDB tempDB = TempDB.getInstance();
+
+        return tempDB.historicalFuelPrices;
+    }
+
+    public static void addTravel(Travel travel) {
+        TempDB tempDB = TempDB.getInstance();
+
+        tempDB.travels.add(travel);
+    }
+
     public static void addTollToTravel(Travel travel, Toll toll) {
         TempDB tempDB = TempDB.getInstance();
 
@@ -133,7 +133,8 @@ public class DataManagement {
     }
 
     /**
-     * WARNING!: This method will wipe all data. This procedure cannot be undone.
+     * WARNING!: This method will wipe all data. This procedure cannot be
+     * undone.
      */
     public static void deleteAllDataBases() {
         TempDB.deleteAllDataBases();
