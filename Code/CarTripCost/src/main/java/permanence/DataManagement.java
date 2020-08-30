@@ -9,6 +9,16 @@ import java.awt.Point;
  */
 public class DataManagement {
 
+    public static boolean hasTolls() {
+        TempDB tempDB = TempDB.getInstance();
+        return !tempDB.tolls.isEmpty();
+    }
+
+    public static boolean hasCars() {
+        TempDB tempDB = TempDB.getInstance();
+        return !tempDB.cars.isEmpty();
+    }
+
     public static void addCar(Car car) {
         TempDB tempDB = TempDB.getInstance();
 
@@ -69,9 +79,5 @@ public class DataManagement {
         TempDB tempDB = TempDB.getInstance();
 
         tempDB.travels.add(travel);
-    }
-
-    public static boolean hasCars() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

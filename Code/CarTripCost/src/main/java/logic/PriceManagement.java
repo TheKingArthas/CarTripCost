@@ -16,18 +16,6 @@ import permanence.TempDB;
  */
 public class PriceManagement {
 
-    public static boolean hasCars() {
-        TempDB tempDB = TempDB.getInstance();
-
-        return !tempDB.cars.isEmpty();
-    }
-
-    public static boolean hasTolls() {
-        TempDB tempDB = TempDB.getInstance();
-
-        return !tempDB.tolls.isEmpty();
-    }
-
     public static double getCarCategoryPrice(CarCategory carCategory) {
         TempDB tempDB = TempDB.getInstance();
         CarCategoryPrice mostUpToDateCarCategoryPrice = tempDB.historicalCarCategoriesPrices.get(0);
