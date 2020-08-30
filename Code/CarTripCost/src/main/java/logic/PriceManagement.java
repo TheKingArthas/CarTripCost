@@ -91,7 +91,7 @@ public class PriceManagement {
         return travelTotalCost / passengersQuantity;
     }
 
-    static void updateFuelTypePrice(FuelType fuelType, double price) {
+    public static void updateFuelTypePrice(FuelType fuelType, double price) {
         Fuel newFuel = new Fuel();
         newFuel.setType(fuelType);
         newFuel.setPrice(price);
