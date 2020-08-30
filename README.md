@@ -20,6 +20,9 @@ The goal it's to achieve a software that calculates the _per-passenger_ cost of 
 > - The distance between locations is linear
 > - All tolls charge the same amount to each car category
 > - There are no location or distance restrictions between the travel origin, destination, and asociated tolls
+> - The distance unit used is kilometers (Km)
+> - The tank capicty unit used is litres (L)
+> - The efficiency unit used is kilometers per litre (Km/L)
 
 ## 1. Reality summary
 The software is centered on **travels**. Each `travel` will have a `date`, an `origin`, a destination, one `car`, a number of passengers (including the driver) and can optionally have one or more **tolls**.
