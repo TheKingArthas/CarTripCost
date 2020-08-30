@@ -225,7 +225,7 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         cleanScreen();
 
-        System.out.println("FUEL | COST |");
+        System.out.println("FUEL | PRICE |");
         System.out.println(FuelType.GASOLINE + " | " + PriceManagement.getFuelPrice(FuelType.GASOLINE));
         System.out.println(FuelType.PREMIUM + " | " + PriceManagement.getFuelPrice(FuelType.PREMIUM));
         System.out.println(FuelType.SUPER + " | " + PriceManagement.getFuelPrice(FuelType.SUPER));
@@ -439,6 +439,7 @@ public class Main {
             if (systemHasTolls) {
                 System.out.println("2) List tolls");
                 System.out.println("3) Update categorie price");
+                System.out.println("4) List car categories prices");
             }
             space();
             System.out.println("0) Go back");
@@ -446,7 +447,7 @@ public class Main {
             space();
             int selection = selectOption();
 
-            if (selection == 1 || selection == 0 || (systemHasTolls && ((selection == 2) || selection == 3))) {
+            if (selection == 1 || selection == 0 || (systemHasTolls && ((selection == 2) || selection == 3 || selection == 4))) {
                 switch (selection) {
                     case 1:
                         addToll();
@@ -457,6 +458,8 @@ public class Main {
                     case 3:
                         updateCategoryPrice();
                         break;
+                    case 4:
+                        listCarCategoriesPrices();
                     case 0:
                         mainMenu();
                         break;
@@ -610,4 +613,23 @@ public class Main {
         mainMenu();
     }
 
+    private static void listCarCategoriesPrices() {
+        Scanner scan = new Scanner(System.in);
+        cleanScreen();
+
+        System.out.println("CATEGORY | PRICE |");
+        System.out.println(CarCategory.CAT_01 + " | " + PriceManagement.getCarCategoryPrice(CarCategory.CAT_01));
+        System.out.println(CarCategory.CAT_02 + " | " + PriceManagement.getCarCategoryPrice(CarCategory.CAT_02));
+        System.out.println(CarCategory.CAT_03 + " | " + PriceManagement.getCarCategoryPrice(CarCategory.CAT_03));
+        System.out.println(CarCategory.CAT_04 + " | " + PriceManagement.getCarCategoryPrice(CarCategory.CAT_04));
+        System.out.println(CarCategory.CAT_05 + " | " + PriceManagement.getCarCategoryPrice(CarCategory.CAT_05));
+        System.out.println(CarCategory.CAT_06 + " | " + PriceManagement.getCarCategoryPrice(CarCategory.CAT_06));
+        System.out.println(CarCategory.CAT_07 + " | " + PriceManagement.getCarCategoryPrice(CarCategory.CAT_07));
+
+        space();
+
+        System.out.print(
+                "Press enter to continue.");
+        scan.nextLine();
+    }
 }
