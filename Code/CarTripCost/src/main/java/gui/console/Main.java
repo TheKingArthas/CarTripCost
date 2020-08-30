@@ -454,6 +454,9 @@ public class Main {
                     case 2:
                         listTolls();
                         break;
+                    case 3:
+                        updateCategoryPrice();
+                        break;
                     case 0:
                         mainMenu();
                         break;
@@ -545,6 +548,66 @@ public class Main {
         space();
         System.out.print("Press enter to continue.");
         scan.nextLine();
+    }
+
+    private static void updateCategoryPrice() {
+        Scanner scan = new Scanner(System.in);
+
+        String errorMessage = "";
+        char confirmation;
+        boolean completedForm = false;
+        boolean confirmed = false;
+
+        CarCategory category = CarCategory.CAT_01;
+        double price = 0;
+
+        while (!confirmed) {
+            cleanScreen();
+            System.out.println("<<<CAR-TRIP-PRICE>>>");
+            System.out.println("<<<Update car categorie toll price>>>");
+            System.out.println(errorMessage);
+
+            if (!completedForm) {
+                space();
+                System.out.println("1) Car category: ");
+                category = carCategorySelector();
+                System.out.println("");
+                System.out.print("2) New price: ");
+                price = scan.nextDouble();
+
+                completedForm = true;
+            }
+            cleanScreen();
+            System.out.println("1) Car category: " + category);
+            System.out.println("2) New price: $ " + price);
+            space();
+            System.out.println("Are these values correct?");
+            confirmation = confirmSubMenu();
+
+            switch (confirmation) {
+                case 'Y':
+                    PriceManagement.updateCarCategoryPrice(category, price);
+
+                    confirmed = true;
+
+                    System.out.print("Fuel price successfully updated. Press enter to continue.");
+                    scan.nextLine();
+                    scan.nextLine();
+                    break;
+                case 'N':
+                    errorMessage = "";
+                    completedForm = false;
+                    scan.nextLine();
+                    break;
+                case 'M':
+                    confirmed = true;
+                    break;
+                default:
+                    errorMessage = "\"" + confirmation + "\" isn't a valid option. Please try again.";
+                    break;
+            }
+        }
+        mainMenu();
     }
 
 }
