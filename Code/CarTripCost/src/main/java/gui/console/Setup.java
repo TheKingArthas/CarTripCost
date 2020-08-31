@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui.console;
 
+import demo.Demo;
 import domain.CarCategory;
 import domain.FuelType;
 import java.util.Scanner;
@@ -16,9 +12,60 @@ import logic.PriceManagement;
  */
 public class Setup {
 
-    public static void start() {
+    private static void waitScreen(){
+        cleanScreen();
+        System.out.println("Please wait...");
+    }
+    
+    private static int selectOption() {
+        System.out.print("Please select an option:");
+
+        Scanner scan = new Scanner(System.in);
+        int selecction = scan.nextInt();
+
+        return selecction;
+    }
+
+    private static void cleanScreen() {
+        for (int i = 0; i < 50; i++) {
+            System.out.println("");
+        }
+    }
+
+    public static void start() throws InterruptedException {
+        cleanScreen();
+        System.out.println("<<<CAR-TRIP-PRICE>>>");
+        System.out.println("");
+        System.out.println("Welcome! Please enter the desired option:");
+        System.out.println("(1) Start program");
+        System.out.println("(2) Run demo");
+        System.out.println("");
+        System.out.println("(0) Exit");
+
+        int selection = selectOption();
+
+        switch (selection) {
+            case 1:
+                configuration();
+                break;
+            case 2:
+                waitScreen();
+                Demo.loadData();
+                break;
+            case 0:
+                System.exit(0);
+                break;
+            default:
+                start();
+                break;
+        }
+
+    }
+
+    public static void configuration() {
         Scanner scan = new Scanner(System.in);
 
+        cleanScreen();
         System.out.println("<<<CAR-TRIP-PRICE>>>");
         System.out.println("<<<Setup>>>");
         System.out.println("");
