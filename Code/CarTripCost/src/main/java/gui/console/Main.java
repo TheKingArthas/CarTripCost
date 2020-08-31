@@ -449,16 +449,17 @@ public class Main {
             System.out.println("1) Add toll");
             if (systemHasTolls) {
                 System.out.println("2) List tolls");
-                System.out.println("3) Update categorie price");
-                System.out.println("4) List car categories prices");
             }
+            System.out.println("3) Update categorie price");
+            System.out.println("4) List car categories prices");
+
             space();
             System.out.println("0) Go back");
 
             space();
             int selection = selectOption();
 
-            if (selection == 1 || selection == 0 || (systemHasTolls && ((selection == 2) || selection == 3 || selection == 4))) {
+            if (selection == 1 || (systemHasTolls && selection == 2) || selection == 3 || selection == 4 || selection == 0) {
                 switch (selection) {
                     case 1:
                         addToll();
@@ -610,7 +611,7 @@ public class Main {
 
                     confirmed = true;
 
-                    System.out.print("Fuel price successfully updated. Press enter to continue.");
+                    System.out.print("Car category price successfully updated. Press enter to continue.");
                     scan.nextLine();
                     scan.nextLine();
                     break;
@@ -685,12 +686,12 @@ public class Main {
                     System.out.println("2) Origin: ");
                     System.out.print("x: ");
                     originX = scan.nextInt();
-                    System.out.println(" y: ");
+                    System.out.print("y: ");
                     originY = scan.nextInt();
-                    System.out.print("3) Destiny: ");
+                    System.out.println("3) Destiny: ");
                     System.out.print("x: ");
                     destinyX = scan.nextInt();
-                    System.out.println(" y: ");
+                    System.out.print("y: ");
                     destinyY = scan.nextInt();
                     System.out.println("");
                     System.out.print("4) Passengers quantity: ");
@@ -729,6 +730,7 @@ public class Main {
                             addTollToTravel(newTravel);
                         }
 
+                        cleanScreen();
                         System.out.print("Travel successfully added.");
                         System.out.println("");
                         System.out.println("These are the travel data: ");
@@ -738,16 +740,16 @@ public class Main {
                         System.out.println("Tank capacity: " + car.getTankCapacity() + " L");
                         System.out.println("Per litre fuel price: " + PriceManagement.getFuelPrice(car.getFuelType()));
                         System.out.println("");
-                        System.out.println("Full tank price: $" + PriceManagement.getFullFuelTankPrice(car));
-                        System.out.println("Maximum distance: " + car.getMaxDistance() + " Km");
+                        System.out.println("Full tank price: $" + String.format("%.2f", PriceManagement.getFullFuelTankPrice(car)));
+                        System.out.println("Maximum distance: " + String.format("%.2f", car.getMaxDistance()) + " Km");
                         System.out.println("");
-                        System.out.println("Travel distance: " + newTravel.getDistance() + " Km");
+                        System.out.println("Travel distance: " + String.format("%.2f", newTravel.getDistance()) + " Km");
                         System.out.println("");
                         System.out.println("Amount of tolls: " + newTravel.getTolls().size());
-                        System.out.println("Total tolls price: $" + PriceManagement.getTravelTollsTotalCost(newTravel));
+                        System.out.println("Total tolls price: $" + String.format("%.2f", PriceManagement.getTravelTollsTotalCost(newTravel)));
                         System.out.println("");
-                        System.out.println("Total travel price: $" + PriceManagement.getTravelTotalCost(newTravel));
-                        System.out.println("Per passenger cost: $" + PriceManagement.getTravelPerPassengerPrice(newTravel));
+                        System.out.println("Total travel price: $" + String.format("%.2f", PriceManagement.getTravelTotalCost(newTravel)));
+                        System.out.println("Per passenger cost: $" + String.format("%.2f", PriceManagement.getTravelPerPassengerPrice(newTravel)));
 
                         System.out.print("Press enter to continue.");
                         scan.nextLine();
@@ -766,7 +768,9 @@ public class Main {
                         break;
                 }
             } else {
-                errorMessage = "There must be cars entered into the system to add a travel";
+                System.out.println("There must be cars entered into the system to add a travel. Press enter to go back.");
+                scan.nextLine();
+                confirmed = true;
             }
         }
         mainMenu();
