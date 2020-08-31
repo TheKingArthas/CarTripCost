@@ -8,7 +8,7 @@ import domain.FuelType;
 import domain.Travel;
 import java.util.ArrayList;
 import java.util.Date;
-import permanence.DataManagement;
+import permanence.OnMemoryDataManager;
 
 /**
  *
@@ -17,10 +17,10 @@ import permanence.DataManagement;
 public class PriceManagement {
 
     public static double getCarCategoryPrice(CarCategory carCategory) {
-        ArrayList<CarCategoryPrice> historicalCarCategoriesPrices = DataManagement.getHistoricalCarCategoriesPrices();
+        ArrayList<CarCategoryPrice> historicalCarCategoriesPrices = OnMemoryDataManager.getHistoricalCarCategoriesPrices();
 
         CarCategoryPrice mostUpToDateCarCategoryPrice = historicalCarCategoriesPrices.get(0);
-        for (CarCategoryPrice ccp : DataManagement.getHistoricalCarCategoriesPrices()) {
+        for (CarCategoryPrice ccp : OnMemoryDataManager.getHistoricalCarCategoriesPrices()) {
             if ((ccp.getCategory().equals(carCategory)) && (ccp.getUpdateDate().after(mostUpToDateCarCategoryPrice.getUpdateDate()))) {
                 mostUpToDateCarCategoryPrice = ccp;
             }
@@ -36,7 +36,7 @@ public class PriceManagement {
     }
 
     public static double getFuelPrice(FuelType fuelType) {
-        ArrayList<Fuel> historicalFuelPrices = DataManagement.getHistoricalFuelPrices();
+        ArrayList<Fuel> historicalFuelPrices = OnMemoryDataManager.getHistoricalFuelPrices();
 
         Fuel mostUpToDateFuel = historicalFuelPrices.get(0);
         double mostUpToDatePrice = mostUpToDateFuel.getPrice();
@@ -50,7 +50,7 @@ public class PriceManagement {
     }
 
     public static void updateCarCategoryPrice(CarCategory carCategory, double expectedPrice) {
-       DataManagement.updateCarCategoryPrice(carCategory, expectedPrice);
+       OnMemoryDataManager.updateCarCategoryPrice(carCategory, expectedPrice);
     }
 
     public static double getTravelTollsTotalCost(Travel travel) {
@@ -82,6 +82,6 @@ public class PriceManagement {
         newFuel.setPrice(price);
         newFuel.setPriceUpdateDate(new Date());
 
-        DataManagement.addFuel(newFuel);
+        OnMemoryDataManager.addFuel(newFuel);
     }
 }

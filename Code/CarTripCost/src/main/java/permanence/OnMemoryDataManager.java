@@ -9,7 +9,7 @@ import java.util.Date;
  *
  * @author Federico De Luca (federicoNdeluca@gmail.com)
  */
-public class DataManagement {
+public class OnMemoryDataManager {
 
     public static boolean hasCars() {
         TempDB tempDB = TempDB.getInstance();

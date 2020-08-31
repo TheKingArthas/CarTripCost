@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 import logic.PriceManagement;
-import permanence.DataManagement;
+import permanence.OnMemoryDataManager;
 
 /**
  *
@@ -130,7 +130,7 @@ public class Main {
     }
 
     private static void fuelManagement() {
-        boolean systemHasFuels = DataManagement.hasFuels();
+        boolean systemHasFuels = OnMemoryDataManager.hasFuels();
         String errorMessage = "";
 
         while (true) {
@@ -281,7 +281,7 @@ public class Main {
     }
 
     private static void carManagement() {
-        boolean systemHasCars = DataManagement.hasCars();
+        boolean systemHasCars = OnMemoryDataManager.hasCars();
         String errorMessage = "";
 
         while (true) {
@@ -388,7 +388,7 @@ public class Main {
                     newCar.setEfficiency(efficiency);
                     newCar.setCategory(category);
 
-                    DataManagement.addCar(newCar);
+                    OnMemoryDataManager.addCar(newCar);
 
                     confirmed = true;
 
@@ -417,7 +417,7 @@ public class Main {
         cleanScreen();
 
         System.out.println("LICENSE PLATE | BRAND | MODEL |");
-        for (Car c : DataManagement.getCars()) {
+        for (Car c : OnMemoryDataManager.getCars()) {
             System.out.println("| " + c.getLicensePlate() + " | " + c.getBrand() + " | " + c.getModel() + " |");
         }
         space();
@@ -427,7 +427,7 @@ public class Main {
 
     //////Toll management//////
     private static void tollManagement() {
-        boolean systemHasTolls = DataManagement.hasTolls();
+        boolean systemHasTolls = OnMemoryDataManager.hasTolls();
         String errorMessage = "";
 
         while (true) {
@@ -517,7 +517,7 @@ public class Main {
                     newToll.setName(name);
                     newToll.setCoordinates(coordinates);
 
-                    DataManagement.addToll(newToll);
+                    OnMemoryDataManager.addToll(newToll);
 
                     confirmed = true;
 
@@ -547,7 +547,7 @@ public class Main {
         int id = 1;
 
         System.out.println("ID | NAME | COORDINATES |");
-        for (Toll t : DataManagement.getTolls()) {
+        for (Toll t : OnMemoryDataManager.getTolls()) {
             System.out.println(id + " | " + t.getName() + " | x: " + t.getCoordinates().x + " | y: " + t.getCoordinates().y);
             id++;
         }
@@ -659,12 +659,12 @@ public class Main {
             System.out.println("<<<Add travel>>>");
             System.out.println(errorMessage);
 
-            if (DataManagement.hasCars()) {
+            if (OnMemoryDataManager.hasCars()) {
 
                 if (!completedForm) {
                     space();
                     System.out.print("1) Car license plate: ");
-                    car = DataManagement.getCarByLicensePlate(scan.nextLine());
+                    car = OnMemoryDataManager.getCarByLicensePlate(scan.nextLine());
                     System.out.println("");
                     System.out.println("2) Origin: ");
                     System.out.print("x: ");
@@ -700,7 +700,7 @@ public class Main {
                         newTravel.setDestiny(new Point(destinyX, destinyY));
                         newTravel.setPassengersQuantity(passengersQuantity);
 
-                        DataManagement.addTravel(newTravel);
+                        OnMemoryDataManager.addTravel(newTravel);
 
                         confirmed = true;
 
@@ -759,7 +759,7 @@ public class Main {
     private static void addTollToTravel(Travel travel) {
         Scanner scan = new Scanner(System.in);
         int selection = Integer.MAX_VALUE;
-        ArrayList<Toll> tolls = DataManagement.getTolls();
+        ArrayList<Toll> tolls = OnMemoryDataManager.getTolls();
 
         while (selection != 0) {
             listTolls();
@@ -768,7 +768,7 @@ public class Main {
             selection = scan.nextInt();
 
             if (selection != 0) {
-                DataManagement.addTollToTravel(travel, tolls.get(selection + 1));
+                OnMemoryDataManager.addTollToTravel(travel, tolls.get(selection + 1));
             }
         }
     }

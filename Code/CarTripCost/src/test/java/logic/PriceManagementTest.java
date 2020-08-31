@@ -8,7 +8,7 @@ import org.junit.After;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
-import permanence.DataManagement;
+import permanence.OnMemoryDataManager;
 
 /**
  *
@@ -68,16 +68,16 @@ public class PriceManagementTest {
         newTravel.addToll(newTollB);
         newTravel.addToll(newTollC);
 
-        DataManagement.addCar(newCar);
-        DataManagement.addFuel(newFuel);
-        DataManagement.addTravel(newTravel);
+        OnMemoryDataManager.addCar(newCar);
+        OnMemoryDataManager.addFuel(newFuel);
+        OnMemoryDataManager.addTravel(newTravel);
 
         PriceManagement.updateCarCategoryPrice(CarCategory.CAT_01, 100.00);
     }
 
     @After
     public void deleteAllDataBases() {
-        DataManagement.deleteAllDataBases();
+        OnMemoryDataManager.deleteAllDataBases();
     }
 
     @Test

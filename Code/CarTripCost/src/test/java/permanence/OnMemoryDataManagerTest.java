@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
  *
  * @author Federico De Luca (federicoNdeluca@gmail.com)
  */
-public class DataManagementTest {
+public class OnMemoryDataManagerTest {
 
     Car newCar;
     String licensePlate;
@@ -46,9 +46,9 @@ public class DataManagementTest {
         newTravel.setOrigin(origin);
         newTravel.setDestiny(destiny);
 
-        DataManagement.addCar(newCar);
-        DataManagement.addFuel(newFuel);
-        DataManagement.addTravel(newTravel);
+        OnMemoryDataManager.addCar(newCar);
+        OnMemoryDataManager.addFuel(newFuel);
+        OnMemoryDataManager.addTravel(newTravel);
 
     }
 
@@ -70,7 +70,7 @@ public class DataManagementTest {
 
     @Test
     public void testGetCarByLicensePlate() {
-        Car obtainedCar = DataManagement.getCarByLicensePlate(licensePlate);
+        Car obtainedCar = OnMemoryDataManager.getCarByLicensePlate(licensePlate);
 
         assertEquals(newCar, obtainedCar);
     }
@@ -94,9 +94,9 @@ public class DataManagementTest {
         Point tollCoordinates = new Point(10, 20);
         expectedToll.setCoordinates(tollCoordinates);
 
-        DataManagement.addToll(expectedToll);
+        OnMemoryDataManager.addToll(expectedToll);
 
-        Toll obtainedToll = DataManagement.getTollByCoordinates(tollCoordinates);
+        Toll obtainedToll = OnMemoryDataManager.getTollByCoordinates(tollCoordinates);
 
         assertEquals(expectedToll, obtainedToll);
     }
@@ -109,9 +109,9 @@ public class DataManagementTest {
         expectedToll.setName(tollName);
         expectedToll.setCoordinates(tollCoordinates);
 
-        DataManagement.addToll(expectedToll);
+        OnMemoryDataManager.addToll(expectedToll);
 
-        Point obtainedCoordinates = DataManagement.getTollCoordinates(tollName);
+        Point obtainedCoordinates = OnMemoryDataManager.getTollCoordinates(tollName);
 
         assertEquals(tollCoordinates, obtainedCoordinates);
     }
