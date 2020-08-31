@@ -9,25 +9,29 @@ import java.util.Date;
  *
  * @author Federico De Luca (federicoNdeluca@gmail.com)
  */
-public class OnMemoryDataManager {
+public class OnMemoryDataManager extends Datamanager {
 
-    public static boolean hasCars() {
+    @Override
+    public boolean hasCars() {
         TempDB tempDB = TempDB.getInstance();
         return !tempDB.cars.isEmpty();
     }
 
-    public static void addCar(Car car) {
+    @Override
+    public void addCar(Car car) {
         TempDB tempDB = TempDB.getInstance();
 
         tempDB.cars.add(car);
     }
 
-    public static ArrayList<Car> getCars() {
+    @Override
+    public ArrayList<Car> getCars() {
         TempDB tempDB = TempDB.getInstance();
         return tempDB.cars;
     }
 
-    public static Car getCarByLicensePlate(String licensePlate) {
+    @Override
+    public Car getCarByLicensePlate(String licensePlate) {
         TempDB tempDB = TempDB.getInstance();
         Car requestedCar = null;
 
@@ -40,24 +44,28 @@ public class OnMemoryDataManager {
         return requestedCar;
     }
 
-    public static boolean hasTolls() {
+    @Override
+    public boolean hasTolls() {
         TempDB tempDB = TempDB.getInstance();
         return !tempDB.tolls.isEmpty();
     }
 
-    public static void addToll(Toll toll) {
+    @Override
+    public void addToll(Toll toll) {
         TempDB tempDB = TempDB.getInstance();
 
         tempDB.tolls.add(toll);
     }
 
-    public static ArrayList<Toll> getTolls() {
+    @Override
+    public ArrayList<Toll> getTolls() {
         TempDB tempDB = TempDB.getInstance();
 
         return tempDB.tolls;
     }
 
-    public static Toll getTollByCoordinates(Point coordinates) {
+    @Override
+    public Toll getTollByCoordinates(Point coordinates) {
         TempDB tempDB = TempDB.getInstance();
         Toll requestedToll = null;
 
@@ -70,7 +78,8 @@ public class OnMemoryDataManager {
         return requestedToll;
     }
 
-    public static Point getTollCoordinates(String name) {
+    @Override
+    public Point getTollCoordinates(String name) {
         TempDB tempDB = TempDB.getInstance();
         Point requestedCoordinates = null;
 
@@ -83,13 +92,14 @@ public class OnMemoryDataManager {
         return requestedCoordinates;
     }
 
-    public static ArrayList<CarCategoryPrice> getHistoricalCarCategoriesPrices() {
+    @Override
+    public ArrayList<CarCategoryPrice> getHistoricalCarCategoriesPrices() {
         TempDB tempDB = TempDB.getInstance();
 
         return tempDB.historicalCarCategoriesPrices;
     }
 
-    public static void updateCarCategoryPrice(CarCategory carCategory, double expectedPrice) {
+    public void updateCarCategoryPrice(CarCategory carCategory, double expectedPrice) {
         TempDB tempDB = TempDB.getInstance();
 
         CarCategoryPrice carCategoryPrice = new CarCategoryPrice();
@@ -100,29 +110,34 @@ public class OnMemoryDataManager {
         tempDB.historicalCarCategoriesPrices.add(carCategoryPrice);
     }
 
-    public static boolean hasFuels() {
+    @Override
+    public boolean hasFuels() {
         TempDB tempDB = TempDB.getInstance();
         return !tempDB.historicalFuelPrices.isEmpty();
     }
 
-    public static void addFuel(Fuel newFuel) {
+    @Override
+    public void addFuel(Fuel newFuel) {
         TempDB tempDB = TempDB.getInstance();
         tempDB.historicalFuelPrices.add(newFuel);
     }
 
-    public static ArrayList<Fuel> getHistoricalFuelPrices() {
+    @Override
+    public ArrayList<Fuel> getHistoricalFuelPrices() {
         TempDB tempDB = TempDB.getInstance();
 
         return tempDB.historicalFuelPrices;
     }
 
-    public static void addTravel(Travel travel) {
+    @Override
+    public void addTravel(Travel travel) {
         TempDB tempDB = TempDB.getInstance();
 
         tempDB.travels.add(travel);
     }
 
-    public static void addTollToTravel(Travel travel, Toll toll) {
+    @Override
+    public void addTollToTravel(Travel travel, Toll toll) {
         TempDB tempDB = TempDB.getInstance();
 
         for (Travel tr : tempDB.travels) {
@@ -136,7 +151,8 @@ public class OnMemoryDataManager {
      * WARNING!: This method will wipe all data. This procedure cannot be
      * undone.
      */
-    public static void deleteAllDataBases() {
+    @Override
+    public void deleteAllDataBases() {
         TempDB.deleteAllDataBases();
     }
 }

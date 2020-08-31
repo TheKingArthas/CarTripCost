@@ -17,10 +17,12 @@ import permanence.OnMemoryDataManager;
 public class PriceManagement {
 
     public static double getCarCategoryPrice(CarCategory carCategory) {
-        ArrayList<CarCategoryPrice> historicalCarCategoriesPrices = OnMemoryDataManager.getHistoricalCarCategoriesPrices();
+        OnMemoryDataManager dataManager = new OnMemoryDataManager();
+
+        ArrayList<CarCategoryPrice> historicalCarCategoriesPrices = dataManager.getHistoricalCarCategoriesPrices();
 
         CarCategoryPrice mostUpToDateCarCategoryPrice = historicalCarCategoriesPrices.get(0);
-        for (CarCategoryPrice ccp : OnMemoryDataManager.getHistoricalCarCategoriesPrices()) {
+        for (CarCategoryPrice ccp : dataManager.getHistoricalCarCategoriesPrices()) {
             if ((ccp.getCategory().equals(carCategory)) && (ccp.getUpdateDate().after(mostUpToDateCarCategoryPrice.getUpdateDate()))) {
                 mostUpToDateCarCategoryPrice = ccp;
             }
@@ -30,13 +32,17 @@ public class PriceManagement {
     }
 
     public static double getFullFuelTankPrice(Car car) {
+        OnMemoryDataManager dataManager = new OnMemoryDataManager();
+
         double tankCapacity = car.getTankCapacity();
         double fuelPricePerLitre = PriceManagement.getFuelPrice(car.getFuelType());
         return tankCapacity * fuelPricePerLitre;
     }
 
     public static double getFuelPrice(FuelType fuelType) {
-        ArrayList<Fuel> historicalFuelPrices = OnMemoryDataManager.getHistoricalFuelPrices();
+        OnMemoryDataManager dataManager = new OnMemoryDataManager();
+
+        ArrayList<Fuel> historicalFuelPrices = dataManager.getHistoricalFuelPrices();
 
         Fuel mostUpToDateFuel = historicalFuelPrices.get(0);
         double mostUpToDatePrice = mostUpToDateFuel.getPrice();
@@ -50,7 +56,9 @@ public class PriceManagement {
     }
 
     public static void updateCarCategoryPrice(CarCategory carCategory, double expectedPrice) {
-       OnMemoryDataManager.updateCarCategoryPrice(carCategory, expectedPrice);
+        OnMemoryDataManager dataManager = new OnMemoryDataManager();
+
+        dataManager.updateCarCategoryPrice(carCategory, expectedPrice);
     }
 
     public static double getTravelTollsTotalCost(Travel travel) {
@@ -77,11 +85,13 @@ public class PriceManagement {
     }
 
     public static void updateFuelTypePrice(FuelType fuelType, double price) {
+        OnMemoryDataManager dataManager = new OnMemoryDataManager();
+
         Fuel newFuel = new Fuel();
         newFuel.setType(fuelType);
         newFuel.setPrice(price);
         newFuel.setPriceUpdateDate(new Date());
 
-        OnMemoryDataManager.addFuel(newFuel);
+        dataManager.addFuel(newFuel);
     }
 }

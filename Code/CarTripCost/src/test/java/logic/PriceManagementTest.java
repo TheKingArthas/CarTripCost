@@ -28,9 +28,12 @@ public class PriceManagementTest {
     Toll newTollA;
     Toll newTollB;
     Toll newTollC;
+    OnMemoryDataManager dataManager;
 
     @Before
     public void setUp() {
+        dataManager = new OnMemoryDataManager();
+
         newCar = new Car();
         licensePlate = "ABC1234";
         newCar.setLicensePlate(licensePlate);
@@ -68,16 +71,16 @@ public class PriceManagementTest {
         newTravel.addToll(newTollB);
         newTravel.addToll(newTollC);
 
-        OnMemoryDataManager.addCar(newCar);
-        OnMemoryDataManager.addFuel(newFuel);
-        OnMemoryDataManager.addTravel(newTravel);
+        dataManager.addCar(newCar);
+        dataManager.addFuel(newFuel);
+        dataManager.addTravel(newTravel);
 
         PriceManagement.updateCarCategoryPrice(CarCategory.CAT_01, 100.00);
     }
 
     @After
     public void deleteAllDataBases() {
-        OnMemoryDataManager.deleteAllDataBases();
+        dataManager.deleteAllDataBases();
     }
 
     @Test

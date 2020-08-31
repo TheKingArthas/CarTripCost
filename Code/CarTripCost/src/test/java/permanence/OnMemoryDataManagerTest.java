@@ -23,9 +23,12 @@ public class OnMemoryDataManagerTest {
     Point origin;
     Point destiny;
     Travel newTravel;
+    OnMemoryDataManager dataManager;
 
     @Before
     public void setUp() {
+        dataManager = new OnMemoryDataManager();
+
         newCar = new Car();
         licensePlate = "ABC1234";
         newCar.setLicensePlate(licensePlate);
@@ -46,9 +49,9 @@ public class OnMemoryDataManagerTest {
         newTravel.setOrigin(origin);
         newTravel.setDestiny(destiny);
 
-        OnMemoryDataManager.addCar(newCar);
-        OnMemoryDataManager.addFuel(newFuel);
-        OnMemoryDataManager.addTravel(newTravel);
+        dataManager.addCar(newCar);
+        dataManager.addFuel(newFuel);
+        dataManager.addTravel(newTravel);
 
     }
 
@@ -70,7 +73,7 @@ public class OnMemoryDataManagerTest {
 
     @Test
     public void testGetCarByLicensePlate() {
-        Car obtainedCar = OnMemoryDataManager.getCarByLicensePlate(licensePlate);
+        Car obtainedCar = dataManager.getCarByLicensePlate(licensePlate);
 
         assertEquals(newCar, obtainedCar);
     }
@@ -94,9 +97,9 @@ public class OnMemoryDataManagerTest {
         Point tollCoordinates = new Point(10, 20);
         expectedToll.setCoordinates(tollCoordinates);
 
-        OnMemoryDataManager.addToll(expectedToll);
+        dataManager.addToll(expectedToll);
 
-        Toll obtainedToll = OnMemoryDataManager.getTollByCoordinates(tollCoordinates);
+        Toll obtainedToll = dataManager.getTollByCoordinates(tollCoordinates);
 
         assertEquals(expectedToll, obtainedToll);
     }
@@ -109,9 +112,9 @@ public class OnMemoryDataManagerTest {
         expectedToll.setName(tollName);
         expectedToll.setCoordinates(tollCoordinates);
 
-        OnMemoryDataManager.addToll(expectedToll);
+        dataManager.addToll(expectedToll);
 
-        Point obtainedCoordinates = OnMemoryDataManager.getTollCoordinates(tollName);
+        Point obtainedCoordinates = dataManager.getTollCoordinates(tollName);
 
         assertEquals(tollCoordinates, obtainedCoordinates);
     }

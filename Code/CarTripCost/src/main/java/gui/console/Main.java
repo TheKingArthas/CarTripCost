@@ -130,7 +130,9 @@ public class Main {
     }
 
     private static void fuelManagement() {
-        boolean systemHasFuels = OnMemoryDataManager.hasFuels();
+        OnMemoryDataManager dataManager = new OnMemoryDataManager();
+
+        boolean systemHasFuels = dataManager.hasFuels();
         String errorMessage = "";
 
         while (true) {
@@ -281,7 +283,9 @@ public class Main {
     }
 
     private static void carManagement() {
-        boolean systemHasCars = OnMemoryDataManager.hasCars();
+        OnMemoryDataManager dataManager = new OnMemoryDataManager();
+
+        boolean systemHasCars = dataManager.hasCars();
         String errorMessage = "";
 
         while (true) {
@@ -319,6 +323,8 @@ public class Main {
     }
 
     private static void addNewCar() {
+        OnMemoryDataManager dataManager = new OnMemoryDataManager();
+
         Scanner scan = new Scanner(System.in);
 
         String errorMessage = "";
@@ -388,7 +394,7 @@ public class Main {
                     newCar.setEfficiency(efficiency);
                     newCar.setCategory(category);
 
-                    OnMemoryDataManager.addCar(newCar);
+                    dataManager.addCar(newCar);
 
                     confirmed = true;
 
@@ -413,11 +419,13 @@ public class Main {
     }
 
     private static void listCars() {
+        OnMemoryDataManager dataManager = new OnMemoryDataManager();
+
         Scanner scan = new Scanner(System.in);
         cleanScreen();
 
         System.out.println("LICENSE PLATE | BRAND | MODEL |");
-        for (Car c : OnMemoryDataManager.getCars()) {
+        for (Car c : dataManager.getCars()) {
             System.out.println("| " + c.getLicensePlate() + " | " + c.getBrand() + " | " + c.getModel() + " |");
         }
         space();
@@ -427,7 +435,9 @@ public class Main {
 
     //////Toll management//////
     private static void tollManagement() {
-        boolean systemHasTolls = OnMemoryDataManager.hasTolls();
+        OnMemoryDataManager dataManager = new OnMemoryDataManager();
+
+        boolean systemHasTolls = dataManager.hasTolls();
         String errorMessage = "";
 
         while (true) {
@@ -472,6 +482,8 @@ public class Main {
     }
 
     private static void addToll() {
+        OnMemoryDataManager dataManager = new OnMemoryDataManager();
+
         Scanner scan = new Scanner(System.in);
 
         String errorMessage = "";
@@ -517,7 +529,7 @@ public class Main {
                     newToll.setName(name);
                     newToll.setCoordinates(coordinates);
 
-                    OnMemoryDataManager.addToll(newToll);
+                    dataManager.addToll(newToll);
 
                     confirmed = true;
 
@@ -542,12 +554,14 @@ public class Main {
     }
 
     private static void listTolls() {
+        OnMemoryDataManager dataManager = new OnMemoryDataManager();
+
         Scanner scan = new Scanner(System.in);
         cleanScreen();
         int id = 1;
 
         System.out.println("ID | NAME | COORDINATES |");
-        for (Toll t : OnMemoryDataManager.getTolls()) {
+        for (Toll t : dataManager.getTolls()) {
             System.out.println(id + " | " + t.getName() + " | x: " + t.getCoordinates().x + " | y: " + t.getCoordinates().y);
             id++;
         }
@@ -638,6 +652,8 @@ public class Main {
 
     //////Travel management//////
     private static void addTravel() {
+        OnMemoryDataManager dataManager = new OnMemoryDataManager();
+
         Scanner scan = new Scanner(System.in);
 
         String errorMessage = "";
@@ -659,12 +675,12 @@ public class Main {
             System.out.println("<<<Add travel>>>");
             System.out.println(errorMessage);
 
-            if (OnMemoryDataManager.hasCars()) {
+            if (dataManager.hasCars()) {
 
                 if (!completedForm) {
                     space();
                     System.out.print("1) Car license plate: ");
-                    car = OnMemoryDataManager.getCarByLicensePlate(scan.nextLine());
+                    car = dataManager.getCarByLicensePlate(scan.nextLine());
                     System.out.println("");
                     System.out.println("2) Origin: ");
                     System.out.print("x: ");
@@ -700,7 +716,7 @@ public class Main {
                         newTravel.setDestiny(new Point(destinyX, destinyY));
                         newTravel.setPassengersQuantity(passengersQuantity);
 
-                        OnMemoryDataManager.addTravel(newTravel);
+                        dataManager.addTravel(newTravel);
 
                         confirmed = true;
 
@@ -757,9 +773,11 @@ public class Main {
     }
 
     private static void addTollToTravel(Travel travel) {
+        OnMemoryDataManager dataManager = new OnMemoryDataManager();
+
         Scanner scan = new Scanner(System.in);
         int selection = Integer.MAX_VALUE;
-        ArrayList<Toll> tolls = OnMemoryDataManager.getTolls();
+        ArrayList<Toll> tolls = dataManager.getTolls();
 
         while (selection != 0) {
             listTolls();
@@ -768,7 +786,7 @@ public class Main {
             selection = scan.nextInt();
 
             if (selection != 0) {
-                OnMemoryDataManager.addTollToTravel(travel, tolls.get(selection + 1));
+                dataManager.addTollToTravel(travel, tolls.get(selection + 1));
             }
         }
     }
