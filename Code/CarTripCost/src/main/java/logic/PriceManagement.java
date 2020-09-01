@@ -55,10 +55,10 @@ public class PriceManagement {
         return mostUpToDatePrice;
     }
 
-    public static void updateCarCategoryPrice(CarCategory carCategory, double expectedPrice) {
+    public static void updateCarCategoryPrice(CarCategory carCategory, double newPrice) {
         OnMemoryDataManager dataManager = new OnMemoryDataManager();
 
-        dataManager.updateCarCategoryPrice(carCategory, expectedPrice);
+        dataManager.updateCarCategoryPrice(carCategory, newPrice);
     }
 
     public static double getTravelTollsTotalPrice(Travel travel) {

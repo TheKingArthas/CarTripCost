@@ -30,7 +30,7 @@ abstract class Datamanager {
 
     abstract ArrayList<CarCategoryPrice> getHistoricalCarCategoriesPrices();
 
-    abstract void updateCarCategoryPrice(CarCategory carCategory, double expectedPrice);
+    abstract void updateCarCategoryPrice(CarCategory carCategory, double newPrice);
 
     abstract boolean hasFuels();
 

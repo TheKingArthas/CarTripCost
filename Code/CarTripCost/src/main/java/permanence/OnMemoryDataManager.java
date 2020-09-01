@@ -99,12 +99,12 @@ public class OnMemoryDataManager extends Datamanager {
         return tempDB.historicalCarCategoriesPrices;
     }
 
-    public void updateCarCategoryPrice(CarCategory carCategory, double expectedPrice) {
+    public void updateCarCategoryPrice(CarCategory carCategory, double newPrice) {
         TempDB tempDB = TempDB.getInstance();
 
         CarCategoryPrice carCategoryPrice = new CarCategoryPrice();
         carCategoryPrice.setCategory(carCategory);
-        carCategoryPrice.setPrice(expectedPrice);
+        carCategoryPrice.setPrice(newPrice);
         carCategoryPrice.setUpdateDate(new Date());
 
         tempDB.historicalCarCategoriesPrices.add(carCategoryPrice);
