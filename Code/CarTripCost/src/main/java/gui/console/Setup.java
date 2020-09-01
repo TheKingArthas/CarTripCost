@@ -34,7 +34,7 @@ public class Setup {
 
     public static void start() throws InterruptedException {
         cleanScreen();
-        System.out.println("<<<CAR-TRIP-PRICE>>>");
+        System.out.println("<<<CAR-TRIP-COST>>>");
         System.out.println("");
         System.out.println("Welcome! Please enter the desired option:");
         System.out.println("(1) Start program");
@@ -66,7 +66,7 @@ public class Setup {
         Scanner scan = new Scanner(System.in);
 
         cleanScreen();
-        System.out.println("<<<CAR-TRIP-PRICE>>>");
+        System.out.println("<<<CAR-TRIP-COST>>>");
         System.out.println("<<<Setup>>>");
         System.out.println("");
         System.out.println("Welcome! Please enter the following prices before starting using the program:");

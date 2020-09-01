@@ -64,7 +64,7 @@ public class Main {
 
         while (!exitProgram) {
             cleanScreen();
-            System.out.println("<<<CAR-TRIP-PRICE>>>");
+            System.out.println("<<<CAR-TRIP-COST>>>");
             System.out.println("<<<Main menu>>>");
             System.out.println(errorMessage);
             space();
@@ -132,7 +132,7 @@ public class Main {
 
         while (true) {
             cleanScreen();
-            System.out.println("<<<CAR-TRIP-PRICE>>>");
+            System.out.println("<<<CAR-TRIP-COST>>>");
             System.out.println("<<<Fuel management>>>");
             System.out.println(errorMessage);
             space();
@@ -178,7 +178,7 @@ public class Main {
 
         while (!confirmed) {
             cleanScreen();
-            System.out.println("<<<CAR-TRIP-PRICE>>>");
+            System.out.println("<<<CAR-TRIP-COST>>>");
             System.out.println("<<<Update fuel type>>>");
             System.out.println(errorMessage);
 
@@ -285,7 +285,7 @@ public class Main {
 
         while (true) {
             cleanScreen();
-            System.out.println("<<<CAR-TRIP-PRICE>>>");
+            System.out.println("<<<CAR-TRIP-COST>>>");
             System.out.println("<<<Car management>>>");
             System.out.println(errorMessage);
             space();
@@ -337,7 +337,7 @@ public class Main {
 
         while (!confirmed) {
             cleanScreen();
-            System.out.println("<<<CAR-TRIP-PRICE>>>");
+            System.out.println("<<<CAR-TRIP-COST>>>");
             System.out.println("<<<Add car>>>");
             System.out.println(errorMessage);
 
@@ -437,7 +437,7 @@ public class Main {
 
         while (true) {
             cleanScreen();
-            System.out.println("<<<CAR-TRIP-PRICE>>>");
+            System.out.println("<<<CAR-TRIP-COST>>>");
             System.out.println("<<<Toll management>>>");
             System.out.println(errorMessage);
             space();
@@ -494,7 +494,7 @@ public class Main {
 
         while (!confirmed) {
             cleanScreen();
-            System.out.println("<<<CAR-TRIP-PRICE>>>");
+            System.out.println("<<<CAR-TRIP-COST>>>");
             System.out.println("<<<Add toll>>>");
             System.out.println(errorMessage);
 
@@ -579,7 +579,7 @@ public class Main {
 
         while (!confirmed) {
             cleanScreen();
-            System.out.println("<<<CAR-TRIP-PRICE>>>");
+            System.out.println("<<<CAR-TRIP-COST>>>");
             System.out.println("<<<Update car categorie toll price>>>");
             System.out.println(errorMessage);
 
@@ -667,7 +667,7 @@ public class Main {
 
         while (!confirmed) {
             cleanScreen();
-            System.out.println("<<<CAR-TRIP-PRICE>>>");
+            System.out.println("<<<CAR-TRIP-COST>>>");
             System.out.println("<<<Add travel>>>");
             System.out.println(errorMessage);
 
