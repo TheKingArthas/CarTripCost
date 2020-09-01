@@ -18,7 +18,7 @@ import permanence.OnMemoryDataManager;
  */
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         cleanScreen();
         Setup.start();
         mainMenu();
