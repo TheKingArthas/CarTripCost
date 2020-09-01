@@ -61,27 +61,27 @@ public class PriceManagement {
         dataManager.updateCarCategoryPrice(carCategory, expectedPrice);
     }
 
-    public static double getTravelTollsTotalCost(Travel travel) {
+    public static double getTravelTollsTotalPrice(Travel travel) {
         int tollsQuantity = travel.getTolls().size();
-        double perTollCost = getCarCategoryPrice(travel.getCar().getCategory());
+        double perTollPrice = getCarCategoryPrice(travel.getCar().getCategory());
 
-        return perTollCost * tollsQuantity;
+        return perTollPrice * tollsQuantity;
     }
 
-    public static double getTravelTotalCost(Travel travel) {
+    public static double getTravelTotalPrice(Travel travel) {
         double distanceToTravel = travel.getDistance();
         double fullTankPrice = getFullFuelTankPrice(travel.getCar());
         double carMaxDistance = travel.getCar().getMaxDistance();
-        double tollsTotalCost = getTravelTollsTotalCost(travel);
+        double tollsTotalPrice = getTravelTollsTotalPrice(travel);
 
-        return ((distanceToTravel * fullTankPrice / carMaxDistance) + tollsTotalCost);
+        return ((distanceToTravel * fullTankPrice / carMaxDistance) + tollsTotalPrice);
     }
 
     public static double getTravelPerPassengerPrice(Travel travel) {
-        double travelTotalCost = getTravelTotalCost(travel);
+        double travelTotalPrice = getTravelTotalPrice(travel);
         int passengersQuantity = travel.getPassengersQuantity();
 
-        return travelTotalCost / passengersQuantity;
+        return travelTotalPrice / passengersQuantity;
     }
 
     public static void updateFuelTypePrice(FuelType fuelType, double price) {

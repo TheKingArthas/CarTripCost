@@ -136,7 +136,7 @@ public class PriceManagementTest {
     public void testGetTollsTotalPrices() {
         double expectedPrice = (PriceManagement.getCarCategoryPrice(newCar.getCategory()) * 3);
         System.out.println(expectedPrice);
-        double obtainedPrice = PriceManagement.getTravelTollsTotalCost(newTravel);
+        double obtainedPrice = PriceManagement.getTravelTollsTotalPrice(newTravel);
         System.out.println(obtainedPrice);
 
         assertEquals(expectedPrice, obtainedPrice, 0.009);
@@ -149,10 +149,10 @@ public class PriceManagementTest {
         double distanceToTravel = newTravel.getDistance();
         double fullTankPrice = PriceManagement.getFullFuelTankPrice(newCar);
         double carMaxDistance = newCar.getMaxDistance();
-        double tollsTotalCost = PriceManagement.getTravelTollsTotalCost(newTravel);
+        double tollsTotalPrice = PriceManagement.getTravelTollsTotalPrice(newTravel);
 
-        double expectedPrice = (distanceToTravel * fullTankPrice / carMaxDistance) + tollsTotalCost;
-        double obtainedPrice = PriceManagement.getTravelTotalCost(newTravel);
+        double expectedPrice = (distanceToTravel * fullTankPrice / carMaxDistance) + tollsTotalPrice;
+        double obtainedPrice = PriceManagement.getTravelTotalPrice(newTravel);
 
         assertEquals(expectedPrice, obtainedPrice, 0.009);
         /*"0.009" was the selected delta to avoid differences
@@ -161,10 +161,10 @@ public class PriceManagementTest {
 
     @Test
     public void testGetTravelPerPassengerPrice() {
-        double travelTotalCost = PriceManagement.getTravelTotalCost(newTravel);
+        double travelTotalPrice = PriceManagement.getTravelTotalPrice(newTravel);
         int passengersQuantity = newTravel.getPassengersQuantity();
 
-        double expectedPrice = travelTotalCost / passengersQuantity;
+        double expectedPrice = travelTotalPrice / passengersQuantity;
         double obtainedPrice = PriceManagement.getTravelPerPassengerPrice(newTravel);
 
         assertEquals(expectedPrice, obtainedPrice, 0.009);

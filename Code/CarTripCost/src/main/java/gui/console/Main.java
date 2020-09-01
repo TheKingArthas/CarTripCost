@@ -741,10 +741,10 @@ public class Main {
                         System.out.println("Travel distance: " + String.format("%.2f", newTravel.getDistance()) + " Km");
                         System.out.println("");
                         System.out.println("Amount of tolls: " + newTravel.getTolls().size());
-                        System.out.println("Total tolls price: $" + String.format("%.2f", PriceManagement.getTravelTollsTotalCost(newTravel)));
+                        System.out.println("Total tolls price: $" + String.format("%.2f", PriceManagement.getTravelTollsTotalPrice(newTravel)));
                         System.out.println("");
-                        System.out.println("Total travel price: $" + String.format("%.2f", PriceManagement.getTravelTotalCost(newTravel)));
-                        System.out.println("Per passenger cost: $" + String.format("%.2f", PriceManagement.getTravelPerPassengerPrice(newTravel)));
+                        System.out.println("Total travel price: $" + String.format("%.2f", PriceManagement.getTravelTotalPrice(newTravel)));
+                        System.out.println("Per passenger price: $" + String.format("%.2f", PriceManagement.getTravelPerPassengerPrice(newTravel)));
 
                         System.out.print("Press enter to continue.");
                         scan.nextLine();
