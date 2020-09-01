@@ -787,7 +787,7 @@ public class Main {
             selection = scan.nextInt();
 
             if (selection != 0) {
-                dataManager.addTollToTravel(travel, tolls.get(selection -1));
+                dataManager.addTollToTravel(travel, tolls.get(selection - 1));
             }
         }
     }

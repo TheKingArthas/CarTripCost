@@ -12,11 +12,11 @@ import logic.PriceManagement;
  */
 public class Setup {
 
-    private static void waitScreen(){
+    private static void waitScreen() {
         cleanScreen();
         System.out.println("Please wait...");
     }
-    
+
     private static int selectOption() {
         System.out.print("Please select an option:");
 
