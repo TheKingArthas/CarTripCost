@@ -102,7 +102,7 @@ public class Main {
         }
     }
 
-    private static void pressEnterToContinue() {
+    private static void pressEnterToContinueMessage() {
         Scanner scan = new Scanner(System.in);
 
         System.out.print("Press enter to continue.");
@@ -240,7 +240,7 @@ public class Main {
         System.out.println(FuelType.SUPER + " | " + PriceManagement.getFuelPrice(FuelType.SUPER));
         space();
 
-        pressEnterToContinue();
+        pressEnterToContinueMessage();
     }
 
     //////Car management//////
@@ -309,6 +309,7 @@ public class Main {
                         break;
                     case 2:
                         listCars();
+                        pressEnterToContinueMessage();
                         break;
                     case 0:
                         mainMenu();
@@ -422,13 +423,13 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         cleanScreen();
 
-        System.out.println("LICENSE PLATE | BRAND | MODEL |");
+        System.out.println("| ID | LICENSE PLATE | BRAND | MODEL |");
+        int id = 0;
         for (Car c : dataManager.getCars()) {
-            System.out.println("| " + c.getLicensePlate() + " | " + c.getBrand() + " | " + c.getModel() + " |");
+            id++;
+            System.out.println("| " + id + " | " + c.getLicensePlate() + " | " + c.getBrand() + " | " + c.getModel() + " |");
         }
         space();
-        System.out.print("Press enter to continue.");
-        scan.nextLine();
     }
 
     //////Toll management//////
@@ -464,7 +465,7 @@ public class Main {
                         break;
                     case 2:
                         listTolls();
-                        pressEnterToContinue();
+                        pressEnterToContinueMessage();
                         break;
                     case 3:
                         updateCategoryPrice();
@@ -677,8 +678,7 @@ public class Main {
 
                 if (!completedForm) {
                     space();
-                    System.out.print("1) Car license plate: ");
-                    car = dataManager.getCarByLicensePlate(scan.nextLine());
+                    car = carSelector();
                     System.out.println("");
                     System.out.println("2) Origin: ");
                     System.out.print("x: ");
@@ -773,6 +773,28 @@ public class Main {
         mainMenu();
     }
 
+    private static Car carSelector() {
+        OnMemoryDataManager dataManager = new OnMemoryDataManager();
+
+        Car selectedCar = null;
+        Scanner scan = new Scanner(System.in);
+        int selection = 0;
+        ArrayList<Car> cars = dataManager.getCars();
+
+        while (selection < 1 || selection > cars.size()) {
+            listCars();
+
+            System.out.print("Please enter the ID of the car you desire to add: ");
+            selection = scan.nextInt();
+
+            if (selection > 0 && selection <= cars.size()) {
+                selectedCar = cars.get(selection - 1);
+            }
+        }
+
+        return selectedCar;
+    }
+
     private static void addTollToTravel(Travel travel) {
         OnMemoryDataManager dataManager = new OnMemoryDataManager();
 
@@ -783,7 +805,7 @@ public class Main {
         while (selection != 0) {
             listTolls();
 
-            System.out.print("Please enter the ID of the toll you desire to add and press enter; or press \"0\" to go continue: ");
+            System.out.print("Please enter the ID of the toll you desire to add and press enter; or press \"0\" to continue: ");
             selection = scan.nextInt();
 
             if (selection != 0) {
@@ -791,4 +813,5 @@ public class Main {
             }
         }
     }
+
 }
