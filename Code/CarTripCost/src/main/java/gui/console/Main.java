@@ -102,6 +102,13 @@ public class Main {
         }
     }
 
+    private static void pressEnterToContinue() {
+        Scanner scan = new Scanner(System.in);
+
+        System.out.print("Press enter to continue.");
+        scan.nextLine();
+    }
+
     //////Fuel management//////
     private static FuelType fuelTypeSelector() {
         Scanner scan = new Scanner(System.in);
@@ -174,7 +181,6 @@ public class Main {
 
         FuelType fuelType = FuelType.GASOLINE;
         double price = 0;
-        Date date = new Date();
 
         while (!confirmed) {
             cleanScreen();
@@ -226,7 +232,6 @@ public class Main {
     }
 
     private static void listFuelPrices() {
-        Scanner scan = new Scanner(System.in);
         cleanScreen();
 
         System.out.println("FUEL | PRICE |");
@@ -235,9 +240,7 @@ public class Main {
         System.out.println(FuelType.SUPER + " | " + PriceManagement.getFuelPrice(FuelType.SUPER));
         space();
 
-        System.out.print(
-                "Press enter to continue.");
-        scan.nextLine();
+        pressEnterToContinue();
     }
 
     //////Car management//////
@@ -445,7 +448,7 @@ public class Main {
             if (systemHasTolls) {
                 System.out.println("2) List tolls");
             }
-            System.out.println("3) Update categorie price");
+            System.out.println("3) Update category price");
             System.out.println("4) List car categories prices");
 
             space();
@@ -461,6 +464,7 @@ public class Main {
                         break;
                     case 2:
                         listTolls();
+                        pressEnterToContinue();
                         break;
                     case 3:
                         updateCategoryPrice();
@@ -562,8 +566,6 @@ public class Main {
             id++;
         }
         space();
-        System.out.print("Press enter to continue.");
-        scan.nextLine();
     }
 
     private static void updateCategoryPrice() {
@@ -718,7 +720,7 @@ public class Main {
 
                         cleanScreen();
 
-                        System.out.println("Do you wanna add tolls to the travel?");
+                        System.out.println("Do you wanna add tolls to this travel?");
                         addTollConfirmation = confirmSubMenu();
 
                         if (addTollConfirmation == 'Y') {
@@ -745,7 +747,7 @@ public class Main {
                         System.out.println("");
                         System.out.println("Total travel price: $" + String.format("%.2f", PriceManagement.getTravelTotalPrice(newTravel)));
                         System.out.println("Per passenger price: $" + String.format("%.2f", PriceManagement.getTravelPerPassengerPrice(newTravel)));
-
+                        space();
                         System.out.print("Press enter to continue.");
                         scan.nextLine();
                         scan.nextLine();
@@ -781,11 +783,11 @@ public class Main {
         while (selection != 0) {
             listTolls();
 
-            System.out.print("Please enter the number of the toll and press enter or press \"0\" to go back: ");
+            System.out.print("Please enter the ID of the toll you desire to add and press enter; or press \"0\" to go continue: ");
             selection = scan.nextInt();
 
             if (selection != 0) {
-                dataManager.addTollToTravel(travel, tolls.get(selection + 1));
+                dataManager.addTollToTravel(travel, tolls.get(selection -1));
             }
         }
     }
