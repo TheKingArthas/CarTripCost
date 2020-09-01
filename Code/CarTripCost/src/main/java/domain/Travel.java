@@ -13,7 +13,6 @@ public class Travel {
     private Date date;
     private Point origin;
     private Point destiny;
-    private double distance;
     private ArrayList<Toll> tolls;
     private Car car;
     private int passengersQuantity;
