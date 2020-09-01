@@ -40,7 +40,7 @@ Also the _per-passenger_ `cost` will be possible to obtain dividing the `total c
 _Java Runtime Enviroment_ must be installed on the computer.
 ### 3.1 Run
 1. To start the program on _Windows_ you should open a _command shell_ and type `java -jar JAR_FILE`
-    >In my case: `java -jar C:\Users\Federico\Desktop\CarTripCost_v1-0.jar`
+    >In my case: `java -jar C:\Users\Federico\Desktop\CarTripCost-v1.0.jar`
 1. Enter `(1)` to select `Start program` and press enter.
 1. The software will ask the current prices of fuel and tolls car categories.
 1. After this values are entered, the main menu will be shown.
